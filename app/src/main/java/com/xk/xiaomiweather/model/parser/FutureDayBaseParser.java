@@ -1,5 +1,9 @@
 package com.xk.xiaomiweather.model.parser;
 
+import com.yolanda.nohttp.rest.Response;
+
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -7,14 +11,15 @@ import java.util.List;
  * Created by xk on 2016/11/2 20:56.
  */
 
-public class FutureDayBaseParser implements IParser<List<FutureDayBaseParser>> {
+public class FutureDayBaseParser extends BaseParser<List<FutureDayBaseParser>,JSONObject> {
+
     @Override
-    public void setUrl() {
+    public void setRequestParams(Object... params) {
 
     }
 
     @Override
-    public List<FutureDayBaseParser> getData() {
+    protected List<FutureDayBaseParser> parser(Response<JSONObject> response) {
         return null;
     }
 }

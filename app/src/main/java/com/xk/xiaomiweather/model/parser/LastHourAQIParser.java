@@ -1,19 +1,24 @@
 package com.xk.xiaomiweather.model.parser;
 
+import com.yolanda.nohttp.rest.Response;
+
+import org.json.JSONObject;
+
 import java.util.Map;
 
 /**
  * Created by xk on 2016/11/2 21:03.
  */
 
-public class LastHourAQIParser implements IParser<Map<String,String>> {
+public class LastHourAQIParser extends BaseParser<Map<String,String>,JSONObject> {
+
     @Override
-    public void setUrl() {
+    public void setRequestParams(Object... params) {
 
     }
 
     @Override
-    public Map<String, String> getData() {
+    protected Map<String, String> parser(Response<JSONObject> response) {
         return null;
     }
 }

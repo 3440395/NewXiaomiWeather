@@ -1,5 +1,9 @@
 package com.xk.xiaomiweather.model.parser;
 
+import com.yolanda.nohttp.rest.Response;
+
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -7,14 +11,15 @@ import java.util.List;
  * Created by xk on 2016/11/2 20:56.
  */
 
-public class ThreeHourBaseParser implements IParser<List<ThreeHourBaseParser>> {
+public class ThreeHourBaseParser  extends  BaseParser<List<ThreeHourBaseParser>,JSONObject> {
+
     @Override
-    public void setUrl() {
+    public void setRequestParams(Object... params) {
 
     }
 
     @Override
-    public List<ThreeHourBaseParser> getData() {
+    protected List<ThreeHourBaseParser> parser(Response<JSONObject> response) {
         return null;
     }
 }
