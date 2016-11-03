@@ -43,12 +43,19 @@ public class WeatherProvider extends ContentProvider {
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/citylist", code_citylist);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/citylist/*", code_citylist_item);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/today_base/*", code_today_base);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/today_base/", code_today_base);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/current_base/*", code_current_base);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/current_base/", code_current_base);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/futureday_base/*", code_futureday_base);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/futureday_base/", code_futureday_base);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/futurehour_base/*", code_futurehour_base);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/futurehour_base/", code_futurehour_base);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/futureday_aqi/*", code_futureday_aqi);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/futureday_aqi/", code_futureday_aqi);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/lasthour_aqi/*", code_lasthour_aqi);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/lasthour_aqi/", code_lasthour_aqi);
         uriMatcher.addURI("com.xk.xiaomiweather", "weather/current_aqi/*", code_current_aqi);
+        uriMatcher.addURI("com.xk.xiaomiweather", "weather/current_aqi/", code_current_aqi);
     }
 
 

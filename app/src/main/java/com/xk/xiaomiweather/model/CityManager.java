@@ -84,6 +84,7 @@ public class CityManager {
         contentResolver.delete(Uri.parse(Constant.baseuri + "current_aqi/" + envicloudId), null, null);
         contentResolver.delete(Uri.parse(Constant.baseuri + "futureday_aqi/" + district), null, null);
         contentResolver.delete(Uri.parse(Constant.baseuri + "lasthour_aqi/" + envicloudId), null, null);
+        query.close();
     }
 
     @WorkerThread

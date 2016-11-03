@@ -36,7 +36,7 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
             JSONObject object = response.get();
             Log.e("FutureDayAQIParser","parser"+object.toString());
             if (object.getInt("rcode")==200) {
-                JSONArray futureDaysJson = object.getJSONObject("info").getJSONArray("forecast");
+                JSONArray futureDaysJson = object.getJSONArray("forecast");
                 HashMap<String, String> futureDaysAQIBean = new HashMap<>();
                 for (int i = 0; i < futureDaysJson.length(); i++) {
                     JSONObject futuredayJson = (JSONObject) futureDaysJson.get(i);
