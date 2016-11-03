@@ -1,15 +1,14 @@
-package com.xk.xiaomiweather.model;
+package com.xk.xiaomiweather.model.manager;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
-import com.xk.xiaomiweather.Constant;
+import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.AQIWeather;
 import com.xk.xiaomiweather.model.bean.BaseWeather;
 import com.xk.xiaomiweather.model.bean.City;
@@ -24,7 +23,7 @@ import com.xk.xiaomiweather.model.parser.CurrentAQIParser;
 import com.xk.xiaomiweather.model.parser.FutureDayAQIParser;
 import com.xk.xiaomiweather.model.parser.LastHourAQIParser;
 import com.xk.xiaomiweather.model.parser.ThreeHourBaseParser;
-import com.xk.xiaomiweather.provider.WeatherProvider;
+import com.xk.xiaomiweather.model.provider.WeatherProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;

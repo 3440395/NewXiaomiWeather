@@ -1,13 +1,10 @@
 package com.xk.xiaomiweather.model.parser;
 
-import android.util.Log;
-
-import com.xk.xiaomiweather.Constant;
+import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.BaseWeather;
 import com.xk.xiaomiweather.model.bean.CurrentBaseWeather;
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.TodayBaseWeather;
-import com.xk.xiaomiweather.model.bean.Weather;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Response;
@@ -18,8 +15,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static android.R.attr.format;
-import static android.R.attr.key;
 import static android.media.CamcorderProfile.get;
 
 /**

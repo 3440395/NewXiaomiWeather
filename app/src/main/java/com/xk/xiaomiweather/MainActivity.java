@@ -1,26 +1,14 @@
 package com.xk.xiaomiweather;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
-import com.xk.xiaomiweather.model.CityManager;
-import com.xk.xiaomiweather.model.WeatherManager;
+import com.xk.xiaomiweather.model.manager.CityManager;
+import com.xk.xiaomiweather.model.manager.WeatherManager;
 import com.xk.xiaomiweather.model.bean.City;
-import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
 import com.xk.xiaomiweather.model.bean.Weather;
-import com.xk.xiaomiweather.model.parser.BaseParser;
-import com.xk.xiaomiweather.model.parser.BaseWeatherParser;
-import com.xk.xiaomiweather.model.parser.CityParser;
-import com.xk.xiaomiweather.model.parser.CurrentAQIParser;
-import com.xk.xiaomiweather.model.parser.FutureDayAQIParser;
-import com.xk.xiaomiweather.model.parser.LastHourAQIParser;
-import com.xk.xiaomiweather.model.parser.ThreeHourBaseParser;
-
-import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity {
     private City chaoyang, taiyuan;

@@ -1,22 +1,13 @@
 package com.xk.xiaomiweather.model.parser;
 
-import android.animation.ObjectAnimator;
-import android.util.Log;
-
-import com.xk.xiaomiweather.Constant;
+import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
-import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Map;
-
-import static android.R.attr.type;
 
 /**
  * 通过环境云id

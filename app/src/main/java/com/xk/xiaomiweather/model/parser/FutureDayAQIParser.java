@@ -2,8 +2,7 @@ package com.xk.xiaomiweather.model.parser;
 
 import android.util.Log;
 
-import com.xk.xiaomiweather.Constant;
-import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
+import com.xk.xiaomiweather.comm.Constant;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Response;
@@ -12,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

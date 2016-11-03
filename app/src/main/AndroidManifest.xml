@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".MApp"
+        android:name=".comm.MApp"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -22,7 +22,7 @@
         </activity>
         <provider
             android:authorities="com.xk.xiaomiweather"
-            android:name=".provider.WeatherProvider"/>
+            android:name=".model.provider.WeatherProvider"/>
     </application>
 
 </manifest>

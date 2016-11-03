@@ -1,12 +1,11 @@
-package com.xk.xiaomiweather;
+package com.xk.xiaomiweather.comm;
 
 import android.app.Application;
 
-import com.xk.xiaomiweather.model.CityManager;
-import com.xk.xiaomiweather.model.WeatherManager;
+import com.xk.xiaomiweather.model.manager.CityManager;
+import com.xk.xiaomiweather.model.manager.WeatherManager;
 import com.yolanda.nohttp.Logger;
 import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.rest.RequestQueue;
 
 /**
  * Created by xuekai on 2016/11/3.

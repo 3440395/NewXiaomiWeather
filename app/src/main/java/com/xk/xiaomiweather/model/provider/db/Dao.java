@@ -1,4 +1,4 @@
-package com.xk.xiaomiweather.provider.db;
+package com.xk.xiaomiweather.model.provider.db;
 
 /**
  * Created by xuekai on 2016/11/2.

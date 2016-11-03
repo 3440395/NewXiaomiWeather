@@ -1,4 +1,4 @@
-package com.xk.xiaomiweather.model;
+package com.xk.xiaomiweather.model.manager;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -7,10 +7,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.WorkerThread;
 
-import com.xk.xiaomiweather.Constant;
+import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.City;
 import com.xk.xiaomiweather.model.parser.CityParser;
-import com.xk.xiaomiweather.provider.WeatherProvider;
 
 import java.util.ArrayList;
 import java.util.List;

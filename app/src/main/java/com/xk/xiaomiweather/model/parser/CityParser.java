@@ -1,8 +1,6 @@
 package com.xk.xiaomiweather.model.parser;
 
-import android.util.Log;
-
-import com.xk.xiaomiweather.Constant;
+import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.City;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;

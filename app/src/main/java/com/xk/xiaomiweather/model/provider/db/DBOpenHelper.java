@@ -1,4 +1,4 @@
-package com.xk.xiaomiweather.provider.db;
+package com.xk.xiaomiweather.model.provider.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

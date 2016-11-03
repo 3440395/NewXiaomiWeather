@@ -1,4 +1,4 @@
-package com.xk.xiaomiweather;
+package com.xk.xiaomiweather.comm;
 
 /**
  * Created by xuekai on 2016/11/3.

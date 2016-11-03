@@ -1,8 +1,6 @@
 package com.xk.xiaomiweather.model.parser;
 
-import android.util.Log;
-
-import com.xk.xiaomiweather.Constant;
+import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
@@ -14,8 +12,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.attr.key;
 
 /**
  * 未来每三小时base天气解析者（根据城市名）

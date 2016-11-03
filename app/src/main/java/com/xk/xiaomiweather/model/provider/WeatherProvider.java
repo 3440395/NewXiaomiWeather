@@ -1,4 +1,4 @@
-package com.xk.xiaomiweather.provider;
+package com.xk.xiaomiweather.model.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -8,9 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.xk.xiaomiweather.provider.db.DBOpenHelper;
+import com.xk.xiaomiweather.model.provider.db.DBOpenHelper;
 
 /**
  * Created by xuekai on 2016/11/1.
