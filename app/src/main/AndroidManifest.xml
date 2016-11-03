@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="com.xk.xiaomiweather"
+            android:name=".provider.WeatherProvider"/>
     </application>
 
 </manifest>

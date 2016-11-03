@@ -1,9 +1,14 @@
 package com.xk.xiaomiweather.model.parser;
 
+import android.util.Log;
+
+import com.xk.xiaomiweather.Constant;
 import com.xk.xiaomiweather.model.bean.City;
+import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
 import com.yolanda.nohttp.rest.Response;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -11,14 +16,27 @@ import org.json.JSONObject;
  */
 
 public class CityParser extends BaseParser<City,JSONObject> {
+    private String url = Constant.BASE_ENVICLOUD_URL + "/v2/citycode/" + Constant.envicloudID;
+    private RequestMethod method=RequestMethod.GET;
 
     @Override
     public void setRequestParams(Object... params) {
+        url=url+"/"+params[0];
+        request = NoHttp.createJsonObjectRequest(url, method);
 
     }
 
     @Override
-    protected City parser(Response response) {
+    protected City parser(Response<JSONObject> response) throws JSONException {
+        if (response.get() != null) {
+            JSONObject object = response.get();
+            if (object.getInt("rcode")==200) {
+                City city = new City();
+                city.setDistrict(object.getString("cityname"));
+                city.setEnvicloudId(object.getString("citycode"));
+                return city;
+            }
+        }
         return null;
     }
 }

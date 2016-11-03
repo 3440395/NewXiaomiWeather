@@ -11,4 +11,48 @@ public class BaseWeather {
     private List<ThreeHourBaseWeather> threeHourBaseWeathers;
     private TodayBaseWeather todayBaseWeather;
     private CurrentBaseWeather currentBaseWeather;
+
+    @Override
+    public String toString() {
+        return "BaseWeather{" +
+                "futureDayBaseWeathers=" + futureDayBaseWeathers +
+                ", threeHourBaseWeathers=" + threeHourBaseWeathers +
+                ", todayBaseWeather=" + todayBaseWeather +
+                ", currentBaseWeather=" + currentBaseWeather +
+                '}';
+    }
+
+    public List<FutureDayBaseWeather> getFutureDayBaseWeathers() {
+        return futureDayBaseWeathers;
+    }
+
+    public void setFutureDayBaseWeathers(List<FutureDayBaseWeather> futureDayBaseWeathers) {
+        this.futureDayBaseWeathers = futureDayBaseWeathers;
+    }
+
+    public List<ThreeHourBaseWeather> getThreeHourBaseWeathers() {
+        return threeHourBaseWeathers;
+    }
+
+    public void setThreeHourBaseWeathers(List<ThreeHourBaseWeather> threeHourBaseWeathers) {
+        this.threeHourBaseWeathers = threeHourBaseWeathers;
+    }
+
+    public TodayBaseWeather getTodayBaseWeather() {
+        return todayBaseWeather;
+    }
+
+    public void setTodayBaseWeather(TodayBaseWeather todayBaseWeather) {
+        this.todayBaseWeather = todayBaseWeather;
+    }
+
+    public CurrentBaseWeather getCurrentBaseWeather() {
+        return currentBaseWeather;
+    }
+
+    public void setCurrentBaseWeather(CurrentBaseWeather currentBaseWeather) {
+        this.currentBaseWeather = currentBaseWeather;
+    }
 }
+
+

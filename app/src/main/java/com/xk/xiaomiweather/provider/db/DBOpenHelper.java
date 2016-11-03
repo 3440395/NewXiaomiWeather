@@ -20,9 +20,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table citylist(district text primary key," +
                 "province text," +
                 "city text," +
-                "envicloudId text," +
-                "juheId text)");
-        db.execSQL("create table today_base(juheId integer primary key autoincrement," +
+                "envicloudId text)");
+        db.execSQL("create table today_base(district text primary key ," +
                 "date_y text," +
                 "week text," +
                 "temperature text," +
@@ -37,14 +36,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "travel_index text," +
                 "exercise_index text," +
                 "drying_index text)");
-        db.execSQL("create table current_base(juheId integer primary key autoincrement," +
+        db.execSQL("create table current_base(district text primary key ," +
                 "temp text," +
                 "wind_direction text," +
                 "wind_strength text," +
                 "humidity text," +
                 "time text)");
         db.execSQL("create table futureday_base(_id integer primary key autoincrement," +
-                "juheId integer," +
+                "district text," +
                 "temperature text," +
                 "weather text," +
                 "weather_id text," +
@@ -52,7 +51,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "week text," +
                 "date text)");
         db.execSQL("create table futurehour_base(_id integer primary key autoincrement," +
-                "juheId integer," +
+                "district text," +
                 "weatherid text," +
                 "weather text," +
                 "temp1 text," +
@@ -63,7 +62,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "sfdate text," +
                 "efdate text)");
         db.execSQL("create table futureday_aqi(_id integer primary key autoincrement," +
-                "envicloudId integer," +
+                "district text," +
                 "date text," +
                 "value text)");
         db.execSQL("create table lasthour_aqi(_id integer primary key autoincrement," +
