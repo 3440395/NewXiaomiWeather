@@ -1,5 +1,7 @@
 package com.xk.xiaomiweather.model.parser;
 
+import android.util.Log;
+
 import com.xk.xiaomiweather.comm.Constant;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
@@ -30,17 +32,23 @@ public class LastHourAQIParser extends BaseParser<Map<String, String>, JSONObjec
     }
 
     @Override
-    protected Map<String, String> parser(Response<JSONObject> response) throws JSONException {
+    protected Map<String, String> parser(Response<JSONObject> response)  {
         if (response.get() != null) {
             JSONObject object = response.get();
-            if (object.getInt("rcode")==200) {
-                JSONArray historyJson = object.getJSONArray("history");
-                HashMap<String, String> stringStringHashMap = new HashMap<>();
-                for (int i = 0; i < historyJson.length(); i++) {
-                    JSONObject aqi = historyJson.getJSONObject(i);
-                    stringStringHashMap.put(aqi.getString("time"),aqi.getString("AQI"));
+            try {
+                if (object.getInt("rcode")==200) {
+                    JSONArray historyJson = object.getJSONArray("history");
+                    HashMap<String, String> stringStringHashMap = new HashMap<>();
+                    for (int i = 0; i < historyJson.length(); i++) {
+                        JSONObject aqi = historyJson.getJSONObject(i);
+                        stringStringHashMap.put(aqi.getString("time"),aqi.getString("AQI"));
+                    }
+                    return stringStringHashMap;
                 }
-                return stringStringHashMap;
+            } catch (JSONException e) {
+                Log.e("LastHourAQIParser","返回的json"+object.toString());
+                e.printStackTrace();
+                return null;
             }
         }
         return null;

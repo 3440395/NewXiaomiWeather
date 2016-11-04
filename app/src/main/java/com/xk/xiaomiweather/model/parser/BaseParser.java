@@ -30,12 +30,7 @@ public abstract class BaseParser<T,U> {
         }
         Response<U> response = NoHttp.startRequestSync(request);
         if (response.isSucceed()) {
-            try {
                 return parser(response);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
         }else{
             return null;
         }
@@ -46,5 +41,5 @@ public abstract class BaseParser<T,U> {
      * @param response
      * @return
      */
-    protected abstract T parser(Response<U> response) throws JSONException;
+    protected abstract T parser(Response<U> response) ;
 }

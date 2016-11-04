@@ -1,5 +1,7 @@
 package com.xk.xiaomiweather.model.parser;
 
+import android.util.Log;
+
 import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
 import com.yolanda.nohttp.NoHttp;
@@ -25,21 +27,27 @@ public class CurrentAQIParser extends BaseParser<CurrentAQIWeather, JSONObject> 
     }
 
     @Override
-    protected CurrentAQIWeather parser(Response<JSONObject> response) throws JSONException {
+    protected CurrentAQIWeather parser(Response<JSONObject> response) {
         if (response.get() != null) {
             JSONObject object = response.get();
-            if (object.getInt("rcode") == 200) {
-                CurrentAQIWeather currentAQIWeather = new CurrentAQIWeather();
-                currentAQIWeather.setPM25(object.getString("PM25"));
-                currentAQIWeather.setTime(object.getString("time"));
-                currentAQIWeather.setRdesc(object.getString("rdesc"));
-                currentAQIWeather.setPM10(object.getString("PM10"));
-                currentAQIWeather.setSO2(object.getString("SO2"));
-                currentAQIWeather.setO3(object.getString("o3"));
-                currentAQIWeather.setNO2(object.getString("NO2"));
-                currentAQIWeather.setPrimary(object.getString("primary"));
-                currentAQIWeather.setCO(object.getString("CO"));
-                return currentAQIWeather;
+            try {
+                if (object.getInt("rcode") == 200) {
+                    CurrentAQIWeather currentAQIWeather = new CurrentAQIWeather();
+                    currentAQIWeather.setPM25(object.getString("PM25"));
+                    currentAQIWeather.setTime(object.getString("time"));
+                    currentAQIWeather.setRdesc(object.getString("rdesc"));
+                    currentAQIWeather.setPM10(object.getString("PM10"));
+                    currentAQIWeather.setSO2(object.getString("SO2"));
+                    currentAQIWeather.setO3(object.getString("o3"));
+                    currentAQIWeather.setNO2(object.getString("NO2"));
+                    currentAQIWeather.setPrimary(object.getString("primary"));
+                    currentAQIWeather.setCO(object.getString("CO"));
+                    return currentAQIWeather;
+                }
+            } catch (JSONException e) {
+                Log.e("CurrentAQIParser","返回的json"+object.toString());
+                e.printStackTrace();
+                return null;
             }
         }
         return null;

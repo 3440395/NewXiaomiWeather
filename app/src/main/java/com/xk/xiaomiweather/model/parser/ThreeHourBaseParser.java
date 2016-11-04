@@ -1,5 +1,7 @@
 package com.xk.xiaomiweather.model.parser;
 
+import android.util.Log;
+
 import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
 import com.yolanda.nohttp.NoHttp;
@@ -30,28 +32,34 @@ public class ThreeHourBaseParser  extends  BaseParser<List<ThreeHourBaseWeather>
     }
 
     @Override
-    protected List<ThreeHourBaseWeather> parser(Response<JSONObject> response) throws JSONException {
+    protected List<ThreeHourBaseWeather> parser(Response<JSONObject> response)  {
         if (response.get() != null) {
             JSONObject object = response.get();
-            if (object.getInt("resultcode")==200) {
-                JSONArray result = object.getJSONArray("result");
-                List<ThreeHourBaseWeather> threeHourBaseWeathers = new ArrayList<>();
-                for (int i = 0; i < result.length(); i++) {
-                    JSONObject threeHourBaseBean = (JSONObject) result.get(i);
-                    ThreeHourBaseWeather threeHourBaseWeather = new ThreeHourBaseWeather();
-                    threeHourBaseWeather.setWeatherid(threeHourBaseBean.getString("weatherid"));
-                    threeHourBaseWeather.setWeather(threeHourBaseBean.getString("weather"));
-                    threeHourBaseWeather.setTemp1(threeHourBaseBean.getString("temp1"));
-                    threeHourBaseWeather.setTemp2(threeHourBaseBean.getString("temp2"));
-                    threeHourBaseWeather.setSh(threeHourBaseBean.getString("sh"));
-                    threeHourBaseWeather.setEh(threeHourBaseBean.getString("eh"));
-                    threeHourBaseWeather.setDate(threeHourBaseBean.getString("date"));
-                    threeHourBaseWeather.setSfdate(threeHourBaseBean.getString("sfdate"));
-                    threeHourBaseWeather.setEfdate(threeHourBaseBean.getString("efdate"));
+            try {
+                if (object.getInt("resultcode")==200) {
+                    JSONArray result = object.getJSONArray("result");
+                    List<ThreeHourBaseWeather> threeHourBaseWeathers = new ArrayList<>();
+                    for (int i = 0; i < result.length(); i++) {
+                        JSONObject threeHourBaseBean = (JSONObject) result.get(i);
+                        ThreeHourBaseWeather threeHourBaseWeather = new ThreeHourBaseWeather();
+                        threeHourBaseWeather.setWeatherid(threeHourBaseBean.getString("weatherid"));
+                        threeHourBaseWeather.setWeather(threeHourBaseBean.getString("weather"));
+                        threeHourBaseWeather.setTemp1(threeHourBaseBean.getString("temp1"));
+                        threeHourBaseWeather.setTemp2(threeHourBaseBean.getString("temp2"));
+                        threeHourBaseWeather.setSh(threeHourBaseBean.getString("sh"));
+                        threeHourBaseWeather.setEh(threeHourBaseBean.getString("eh"));
+                        threeHourBaseWeather.setDate(threeHourBaseBean.getString("date"));
+                        threeHourBaseWeather.setSfdate(threeHourBaseBean.getString("sfdate"));
+                        threeHourBaseWeather.setEfdate(threeHourBaseBean.getString("efdate"));
 
-                    threeHourBaseWeathers.add(threeHourBaseWeather);
+                        threeHourBaseWeathers.add(threeHourBaseWeather);
+                    }
+                    return threeHourBaseWeathers;
                 }
-                return threeHourBaseWeathers;
+            } catch (JSONException e) {
+                Log.e("ThreeHourBaseParser","返回的json"+object.toString());
+                e.printStackTrace();
+                return null;
             }
         }
         return null;

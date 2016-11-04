@@ -1,5 +1,7 @@
 package com.xk.xiaomiweather.model.parser;
 
+import android.util.Log;
+
 import com.xk.xiaomiweather.comm.Constant;
 import com.xk.xiaomiweather.model.bean.City;
 import com.yolanda.nohttp.NoHttp;
@@ -25,14 +27,20 @@ public class CityParser extends BaseParser<City,JSONObject> {
     }
 
     @Override
-    protected City parser(Response<JSONObject> response) throws JSONException {
+    protected City parser(Response<JSONObject> response)  {
         if (response.get() != null) {
             JSONObject object = response.get();
-            if (object.getInt("rcode")==200) {
-                City city = new City();
-                city.setDistrict(object.getString("cityname"));
-                city.setEnvicloudId(object.getString("citycode"));
-                return city;
+            Log.e("CityParser","parser"+object.toString() );
+            try {
+                if (object.getInt("rcode")==200) {
+                    City city = new City();
+                    city.setDistrict(object.getString("cityname"));
+                    city.setEnvicloudId(object.getString("citycode"));
+                    return city;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
             }
         }
         return null;
