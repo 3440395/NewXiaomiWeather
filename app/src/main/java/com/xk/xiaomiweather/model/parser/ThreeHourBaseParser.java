@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class ThreeHourBaseParser  extends  BaseParser<List<ThreeHourBaseWeather>
 
     @Override
     public void setRequestParams(Object... params) {
-        url=url+params[0]+"&key="+Constant.juheID;
+        url=url+ URLEncoder.encode((String) params[0])+"&key="+Constant.juheID;
         request = NoHttp.createJsonObjectRequest(url, method);
 
     }

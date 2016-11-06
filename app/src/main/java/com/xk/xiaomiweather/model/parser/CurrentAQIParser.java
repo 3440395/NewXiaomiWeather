@@ -11,6 +11,8 @@ import com.yolanda.nohttp.rest.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+
 /**
  * 通过环境云id
  * Created by xk on 2016/11/2 21:03.
@@ -22,7 +24,7 @@ public class CurrentAQIParser extends BaseParser<CurrentAQIWeather, JSONObject> 
 
     @Override
     public void setRequestParams(Object... params) {
-        url = url + "/" + params[0];
+        url = url + "/" + URLEncoder.encode((String) params[0]);
         request = NoHttp.createJsonObjectRequest(url, method);
     }
 
@@ -32,6 +34,7 @@ public class CurrentAQIParser extends BaseParser<CurrentAQIWeather, JSONObject> 
             JSONObject object = response.get();
             try {
                 if (object.getInt("rcode") == 200) {
+                    Log.e("CurrentAQIParser","parser"+object);
                     CurrentAQIWeather currentAQIWeather = new CurrentAQIWeather();
                     currentAQIWeather.setPM25(object.getString("PM25"));
                     currentAQIWeather.setTime(object.getString("time"));

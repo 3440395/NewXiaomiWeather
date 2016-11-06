@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
 
     @Override
     public void setRequestParams(Object... params) {
-        url=url+params[0];
+        url=url+ URLEncoder.encode((String) params[0]);
         request = NoHttp.createJsonObjectRequest(url, method);
     }
 

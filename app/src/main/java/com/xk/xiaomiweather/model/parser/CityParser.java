@@ -11,6 +11,8 @@ import com.yolanda.nohttp.rest.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+
 /**
  * Created by xk on 2016/11/2 20:46.
  */
@@ -21,7 +23,7 @@ public class CityParser extends BaseParser<City,JSONObject> {
 
     @Override
     public void setRequestParams(Object... params) {
-        url=url+"/"+params[0];
+        url=url+"/"+ URLEncoder.encode((String) params[0]);
         request = NoHttp.createJsonObjectRequest(url, method);
 
     }

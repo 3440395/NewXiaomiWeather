@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class LastHourAQIParser extends BaseParser<Map<String, String>, JSONObjec
     @Override
     public void setRequestParams(Object... params) {
         for (Object param : params) {
-            url += ("/" + param.toString());
+            url += ("/" + URLEncoder.encode(param.toString()));
         }
         request = NoHttp.createJsonObjectRequest(url, method);
     }
