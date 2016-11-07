@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="110px"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/wind_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="风向"
+            android:textColor="#fff"
+
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="#fff"
+android:id="@+id/wind_strength"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="110px"
+        android:background="#ffffff" />
+
+    <LinearLayout  android:gravity="center"
+        android:layout_width="0dp"
+
+        android:layout_height="110px"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相对湿度"
+            android:textColor="#fff"
+
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="#fff"
+android:id="@+id/humidity"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="110px"
+        android:background="#ffffff" />
+
+    <LinearLayout  android:gravity="center"
+        android:layout_width="0dp"
+
+        android:layout_height="110px"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="空气质量"
+            android:textColor="#fff"
+android:id="@+id/aqi"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="#fff"
+android:id="@+id/aqi_index"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

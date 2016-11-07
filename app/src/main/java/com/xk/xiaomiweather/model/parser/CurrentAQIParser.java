@@ -45,6 +45,7 @@ public class CurrentAQIParser extends BaseParser<CurrentAQIWeather, JSONObject> 
                     currentAQIWeather.setNO2(object.getString("NO2"));
                     currentAQIWeather.setPrimary(object.getString("primary"));
                     currentAQIWeather.setCO(object.getString("CO"));
+                    currentAQIWeather.setAQI(object.getString("AQI"));
                     return currentAQIWeather;
                 }
             } catch (JSONException e) {

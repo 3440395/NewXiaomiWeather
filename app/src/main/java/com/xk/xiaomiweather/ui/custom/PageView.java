@@ -54,6 +54,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     //第一次绘制完成（用来使他滚动到maxPullHeight）
     private boolean firstDraw = true;
     private Weather weather;
+    private MainView mainView;
 
     public PageView(Context context, City city) {
         super(context);
@@ -184,7 +185,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         setVerticalScrollBarEnabled(false);
 
 
-        MainView mainView = new MainView(context);
+        mainView = new MainView(context);
         LinearLayout.LayoutParams mainViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1090);
         mainView.setLayoutParams(mainViewLayoutParams);
         LinearLayout linearLayout = new LinearLayout(context);
@@ -198,7 +199,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         TextView textView = new TextView(context);
 
         textView.setTextSize(30);
-        textView.setText("adfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfa");
+        textView.setText("adfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfa");
         linearLayout.addView(textView);
         addView(linearLayout);
 
@@ -231,6 +232,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
+        mainView.update(data);
 
     }
 
