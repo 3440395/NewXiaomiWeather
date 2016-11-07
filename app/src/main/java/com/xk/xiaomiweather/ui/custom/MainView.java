@@ -1,6 +1,7 @@
 package com.xk.xiaomiweather.ui.custom;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
         addView(tempTextView);
 
         cityAndState = new TextView(getContext());
-        cityAndState.setText("北京 | 晴");
+        cityAndState.setText("");
         cityAndState.setTextColor(0xaaffffff);
         cityAndState.setTextSize(14);
         LayoutParams cityAndStateLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -86,36 +87,39 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
-        String aqi = data.getAqiWeather().getCurrentAQIWeather().getAQI();
-        String aqiDes;
-        if (aqi != null) {
+        if (data.getAqiWeather().getCurrentAQIWeather() != null) {
+            String aqi = data.getAqiWeather().getCurrentAQIWeather().getAQI();
+            String aqiDes;
+            if (aqi != null) {
 
 
-            int iaqi = Integer.parseInt(aqi);
-            if (iaqi >= 0 && iaqi <= 50) {
-                aqiDes = "空气优";
-            } else if (iaqi > 50 && iaqi <= 100) {
-                aqiDes = "空气良";
+                int iaqi = Integer.parseInt(aqi);
+                if (iaqi >= 0 && iaqi <= 50) {
+                    aqiDes = "空气优";
+                } else if (iaqi > 50 && iaqi <= 100) {
+                    aqiDes = "空气良";
 
-            } else if (iaqi > 100 && iaqi <= 150) {
-                aqiDes = "空气中";
+                } else if (iaqi > 100 && iaqi <= 150) {
+                    aqiDes = "空气中";
 
-            } else {
-                aqiDes = "空气差";
+                } else {
+                    aqiDes = "空气差";
+                }
+                this.aqi.setText(aqiDes);
+                aqi_index.setText(aqi);
             }
-            this.aqi.setText(aqiDes);
-            aqi_index.setText(aqi);
+            wind_direction.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_direction());
+            wind_strength.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_strength());
+            humidity.setText(data.getBaseWeather().getCurrentBaseWeather().getHumidity());
+            tempTextView.setText(data.getBaseWeather().getCurrentBaseWeather().getTemp() + "°");
+            String[] split = null;
+            if (data.getBaseWeather().getTodayBaseWeather().getWeather().contains("-")) {
+                split = data.getBaseWeather().getTodayBaseWeather().getWeather().split("-");
+                cityAndState.setText(data.getCity().getDistrict() + " | " + split[0]);
+            } else {
+                cityAndState.setText(data.getCity().getDistrict() + " | " + data.getBaseWeather().getTodayBaseWeather().getWeather());
+            }
         }
-        wind_direction.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_direction());
-        wind_strength.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_strength());
-        humidity.setText(data.getBaseWeather().getCurrentBaseWeather().getHumidity());
-        tempTextView.setText(data.getBaseWeather().getCurrentBaseWeather().getTemp() + "°");
-        String[] split = null;
-        if (data.getBaseWeather().getTodayBaseWeather().getWeather().contains("-")) {
-            split = data.getBaseWeather().getTodayBaseWeather().getWeather().split("-");
-            cityAndState.setText(data.getCity().getDistrict() + " | " + split[0]);
-        } else {
-            cityAndState.setText(data.getCity().getDistrict() + " | " + data.getBaseWeather().getTodayBaseWeather().getWeather());
-        }
+
     }
 }

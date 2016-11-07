@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.City;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     //顶部显示天气的view
     private TopView topView;
     private PageView currentPager;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +79,9 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
         topView.setLayoutParams(topViewLayoutParams);
 
         root.addView(topView);
-
-
+        progressBar = new ProgressBar(getApplicationContext());
+        progressBar.setVisibility(View.GONE);
+        root.addView(progressBar);
 //        City city1 = new City();
 //        city1.setDistrict("北京");
 //        city1.setEnvicloudId("101010100");
@@ -99,12 +102,14 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
      * 进来后先获取所有城市列表
      */
     private void initData() {
+
         List<City> allCity = CityManager.getInstance().getAllCity();
         if (allCity.size() == 0) {
+            progressBar.setVisibility(View.VISIBLE);
             ExecutorUtil.getInstance().runOnSingleThread(new Runnable() {
                 @Override
                 public void run() {
-                    CityManager.getInstance().addCity("上海");
+                    CityManager.getInstance().addCity("青岛");
                     CityManager.getInstance().addCity("南京");
                     CityManager.getInstance().addCity("天津");
                     List<City> allCity1 = CityManager.getInstance().getAllCity();
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
                         @Override
                         public void run() {
                             viewPagerAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
                 }

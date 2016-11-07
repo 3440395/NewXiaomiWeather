@@ -29,7 +29,6 @@ public class ExecutorUtil {
 
     }
     public void runOnUiThread(Runnable runnable){
-        Log.e("ExecutorUtil","runOnUiThread"+mContext);
         ((MApp)mContext).runTask(runnable);
     }
 

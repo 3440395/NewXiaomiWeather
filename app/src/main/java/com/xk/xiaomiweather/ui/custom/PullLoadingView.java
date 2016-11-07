@@ -2,6 +2,7 @@ package com.xk.xiaomiweather.ui.custom;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -15,6 +16,9 @@ import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
 import com.xk.xiaomiweather.model.manager.WeatherManager;
 import com.xk.xiaomiweather.ui.callback.OnPullStateChangeListener;
+import com.xk.xiaomiweather.ui.util.SharedPrenfenceUtil;
+
+import java.text.SimpleDateFormat;
 
 import static android.R.attr.max;
 
@@ -75,7 +79,22 @@ public class PullLoadingView extends RelativeLayout {
                     if (iconRotateAnimation != null) {
                         iconRotateAnimation=null;
                     }
-                    refreshText.setText("刷新时间");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                    String refreshTime = SharedPrenfenceUtil.getString(getContext(), parent.getWeather().getCity().getDistrict());
+                    if (refreshTime!=null&&!refreshTime.equals("")) {
+                        long interval = System.currentTimeMillis() - Long.parseLong(refreshTime);
+                        if(interval<(60*1000)){//小于一分钟
+                            refreshText.setText("刚刚更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                        }else if(interval<(60*1000*5)){//小于5分钟
+                            refreshText.setText(interval/60+"分钟前更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                        }else{
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
+                            String time = simpleDateFormat.format(Long.parseLong(refreshTime));
+                            refreshText.setText("上次更新："+time);// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+
+                        }
+                    }else{
+                        refreshText.setText("请更新数据");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                    }
                 }else{
                     iconRotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
                     iconRotateAnimation.setRepeatCount(-1);

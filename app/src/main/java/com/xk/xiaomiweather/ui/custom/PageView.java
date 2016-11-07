@@ -28,6 +28,7 @@ import com.xk.xiaomiweather.ui.MainActivity;
 import com.xk.xiaomiweather.ui.callback.OnPullStateChangeListener;
 import com.xk.xiaomiweather.ui.util.ExecutorUtil;
 import com.xk.xiaomiweather.ui.util.ScreenManager;
+import com.xk.xiaomiweather.ui.util.SharedPrenfenceUtil;
 
 import static android.media.CamcorderProfile.get;
 
@@ -55,6 +56,8 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private boolean firstDraw = true;
     private Weather weather;
     private MainView mainView;
+    //上次刷新距离现在几分钟  可刷新 否则不刷新
+    private int lastRefresh = 1;
 
     public PageView(Context context, City city) {
         super(context);
@@ -167,6 +170,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
                 ExecutorUtil.getInstance().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.e("PageView", "run" + weather);
                         if (weather == null) {
                             refreshData();
                         } else {
@@ -218,8 +222,19 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
                 if (upScrollY < maxPullHeight && upScrollY > 0) {
                     fluencyScrollTo(maxPullHeight, pushTime);
                 } else if (this.getScrollY() == 0) {
-                    Log.e("PageView", "onTouchEvent已到达最大高度 开始刷新");
-                    refreshData();
+                    String time = SharedPrenfenceUtil.getString(context, city.getDistrict());
+                    if (time != null && !time.equals("")) {
+                        long interval = System.currentTimeMillis() - Long.parseLong(time);
+                        if (weather != null && weather.getAqiWeather().getCurrentAQIWeather() != null && interval > lastRefresh * 60 * 1000) {
+                            refreshData();
+                        } else {
+                            fluencyScrollTo(maxPullHeight, pushTime);
+                        }
+                    } else {
+                        refreshData();
+                    }
+
+
                 }
                 break;
             case MotionEvent.ACTION_DOWN:
@@ -274,8 +289,10 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
                     public void run() {
                         fluencyScrollTo(maxPullHeight, 200);
                         ((MainActivity) context).onRefresh(weather, PageView.this);
+                        SharedPrenfenceUtil.putString(context, city.getDistrict(), System.currentTimeMillis() + "");
                         //刷新成功了  更新ui
                         update(weather);
+
                         Toast.makeText(context, "获取天气成功" + weather.getCity().getDistrict() + "" + weather.getBaseWeather().getCurrentBaseWeather().getHumidity(), Toast.LENGTH_SHORT).show();
                     }
                 });
