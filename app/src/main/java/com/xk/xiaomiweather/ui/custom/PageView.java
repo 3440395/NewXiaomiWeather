@@ -182,18 +182,23 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private void init() {
         //隐藏scrollbar
         setVerticalScrollBarEnabled(false);
-        TextView textView = new TextView(context);
-        textView.setLines(20);
-        textView.setBackgroundColor(0xff0000ff);
-        textView.setTextSize(50);
-        textView.setText("阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫阿道夫");
+
+
+        MainView mainView = new MainView(context);
+        LinearLayout.LayoutParams mainViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1090);
+        mainView.setLayoutParams(mainViewLayoutParams);
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         PullLoadingView view = new PullLoadingView(context, this, maxPullHeight);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, maxPullHeight);
         view.setLayoutParams(layoutParams);
         linearLayout.addView(view);
+        linearLayout.addView(mainView);
 
+        TextView textView = new TextView(context);
+
+        textView.setTextSize(30);
+        textView.setText("adfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfa");
         linearLayout.addView(textView);
         addView(linearLayout);
 

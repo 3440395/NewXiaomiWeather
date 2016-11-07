@@ -24,7 +24,6 @@ public class ExecutorUtil {
         return executorUtil;
     }
     public void init(Context context){
-        Log.e("ExecutorUtil","init"+context);
         this.mContext=context;
         executorService = Executors.newSingleThreadExecutor();
 
