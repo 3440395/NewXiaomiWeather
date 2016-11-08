@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.support.annotation.UiThread;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -63,6 +64,11 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private WeatherItemView weatherItemView;
     private WeatherItemView weatherItemView2;
     private TitleItem titleItem2;
+    private AdviceItemView travelItemView;
+    private AdviceItemView dressItemView;
+    private AdviceItemView uvItemView;
+    private AdviceItemView exerciseItemView;
+    private AdviceItemView washItemView;
 
     public PageView(Context context, City city) {
         super(context);
@@ -257,11 +263,55 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         detailItem2.setLayoutParams(detailItemLayoutParams);
         linearLayout.addView(detailItem2);
 
-        TextView textView = new TextView(context);
-        textView.setTextSize(30);
-        textView.setText("adfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfa");
-        linearLayout.addView(textView);
+        //添加出行建议 title
+        TitleItem titleItem3 = new TitleItem(context, "出行建议");
+        titleItem3.setLayoutParams(titleItemLayoutParams);
+        linearLayout.addView(titleItem3);
+
+        //添加打伞建议
+        travelItemView = new AdviceItemView(context, R.mipmap.icon_san);
+        LinearLayout.LayoutParams travelLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        travelItemView.setLayoutParams(travelLayoutParams);
+        linearLayout.addView(travelItemView);
+        //添加穿衣建议
+        dressItemView = new AdviceItemView(context, R.mipmap.icon_dress);
+        LinearLayout.LayoutParams dressLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        dressItemView.setLayoutParams(dressLayoutParams);
+        linearLayout.addView(dressItemView);
+        //添加打紫外线建议
+        uvItemView = new AdviceItemView(context, R.mipmap.icon_uv);
+        LinearLayout.LayoutParams uvLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        uvItemView.setLayoutParams(uvLayoutParams);
+        linearLayout.addView(uvItemView);
+        //添加运动建议 title
+        TitleItem titleItem4 = new TitleItem(context, "运动建议");
+        titleItem4.setLayoutParams(titleItemLayoutParams);
+        linearLayout.addView(titleItem4);
+        //添加运动建议
+        exerciseItemView = new AdviceItemView(context, R.mipmap.icon_exercise);
+        LinearLayout.LayoutParams exerciseLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        exerciseItemView.setLayoutParams(exerciseLayoutParams);
+        linearLayout.addView(exerciseItemView); //添加出行建议 title
+        //添加汽车建议 title
+        TitleItem titleItem5 = new TitleItem(context, "驾车建议");
+        titleItem5.setLayoutParams(titleItemLayoutParams);
+        linearLayout.addView(titleItem5);
+        //添加洗车建议
+        washItemView = new AdviceItemView(context, R.mipmap.icon_wash);
+        LinearLayout.LayoutParams washLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        washItemView.setLayoutParams(washLayoutParams);
+        linearLayout.addView(washItemView); //添加出行建议 title
+
+
+        TextView adTextView = new TextView(context);
+        adTextView.setTextSize(12);
+        adTextView.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams adTextViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+        adTextView.setLayoutParams(adTextViewLayoutParams);
+        adTextView.setText("环境云     聚合天气");
+        linearLayout.addView(adTextView);
         addView(linearLayout);
+
 
     }
 
@@ -304,11 +354,16 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     @Override
     public void update(Weather data) {
         if (data != null && data.getBaseWeather().getFutureDayBaseWeathers().size() > 0) {
-            Log.e("PageView","update"+data.getBaseWeather().getTodayBaseWeather());
+            Log.e("PageView", "update" + data.getBaseWeather().getTodayBaseWeather());
             mainView.update(data);
             weatherItemView.update(data);
             weatherItemView1.update(data);
             weatherItemView2.update(data);
+            travelItemView.update(data.getBaseWeather().getTodayBaseWeather());
+            dressItemView.update(data.getBaseWeather().getTodayBaseWeather());
+            uvItemView.update(data.getBaseWeather().getTodayBaseWeather());
+            exerciseItemView.update(data.getBaseWeather().getTodayBaseWeather());
+            washItemView.update(data.getBaseWeather().getTodayBaseWeather());
         }
         if (data != null && data.getAqiWeather().getCurrentAQIWeather() != null) {
             titleItem2.update(data.getAqiWeather().getCurrentAQIWeather());
