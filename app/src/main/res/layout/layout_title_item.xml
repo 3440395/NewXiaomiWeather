@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#ffff"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40px"
+        android:text="空气质量" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="1px"
+        android:layout_height="38px"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20px"
+        android:layout_toRightOf="@id/title"
+        android:background="#8a8a8a"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/aqi_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40px"
+        android:layout_toRightOf="@id/title"
+        android:text="优"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/time"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="40px"
+        android:text="19:00发布"
+        android:visibility="invisible" />
+</RelativeLayout>

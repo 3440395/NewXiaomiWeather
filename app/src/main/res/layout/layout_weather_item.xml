@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@mipmap/icon_sun"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:textColor="#000"
-        android:layout_height="wrap_content"
-        android:text="今天"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="晴 | 优"
-        android:textColor="#8a8a8a"/>
+    android:layout_height="match_parent"
+    android:background="#fff"
+    >
 
-    <TextView
-        android:textColor="#000"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_marginLeft="75px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12°/1°"/>
+        android:layout_centerVertical="true"
+        android:src="@mipmap/icon_sun" />
+
+    <LinearLayout
+        android:layout_marginLeft="225px"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textSize="14sp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textSize="13sp"
+            android:textColor="#8a8a8a" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/temp"
+        android:layout_centerVertical="true"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="--°C/--°C"
+        android:layout_marginRight="85px"
+        android:textColor="#000" />
+    <View
+        android:id="@+id/bottomLine"
+        android:background="#8a8a8a"
+        android:layout_alignParentBottom="true"
+        android:layout_width="855px"
+        android:layout_alignParentRight="true"
+        android:layout_height="1px"/>
 </RelativeLayout>

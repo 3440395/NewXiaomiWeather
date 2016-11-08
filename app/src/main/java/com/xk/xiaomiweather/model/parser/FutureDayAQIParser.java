@@ -40,8 +40,9 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
                     HashMap<String, String> futureDaysAQIBean = new HashMap<>();
                     for (int i = 0; i < futureDaysJson.length(); i++) {
                         JSONObject futuredayJson = (JSONObject) futureDaysJson.get(i);
-                        futureDaysAQIBean.put(futuredayJson.getString("date"),futuredayJson.getString("aqi_avg"));
+                        futureDaysAQIBean.put(futuredayJson.getString("date").replace("-",""),futuredayJson.getString("aqi_avg"));
                     }
+                    Log.e("FutureDayAQIParser","parser"+futureDaysAQIBean.toString());
                     return futureDaysAQIBean;
                 }
             } catch (JSONException e) {

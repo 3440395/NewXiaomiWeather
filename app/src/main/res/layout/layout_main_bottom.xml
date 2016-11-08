@@ -22,11 +22,11 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/wind_strength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="--"
             android:textColor="#fff"
-android:id="@+id/wind_strength"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -36,12 +36,14 @@ android:id="@+id/wind_strength"
         android:layout_height="110px"
         android:background="#ffffff" />
 
-    <LinearLayout  android:gravity="center"
+    <LinearLayout
         android:layout_width="0dp"
-
         android:layout_height="110px"
+
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,11 +53,11 @@ android:id="@+id/wind_strength"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="--"
             android:textColor="#fff"
-android:id="@+id/humidity"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -65,26 +67,28 @@ android:id="@+id/humidity"
         android:layout_height="110px"
         android:background="#ffffff" />
 
-    <LinearLayout  android:gravity="center"
+    <LinearLayout
         android:layout_width="0dp"
-
         android:layout_height="110px"
+
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="vertical">
+
         <TextView
+            android:id="@+id/aqi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="空气质量"
             android:textColor="#fff"
-android:id="@+id/aqi"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/aqi_index"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="--"
             android:textColor="#fff"
-android:id="@+id/aqi_index"
             android:textSize="15sp" />
     </LinearLayout>
 

@@ -87,12 +87,9 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
-        if (data.getAqiWeather().getCurrentAQIWeather() != null) {
             String aqi = data.getAqiWeather().getCurrentAQIWeather().getAQI();
             String aqiDes;
             if (aqi != null) {
-
-
                 int iaqi = Integer.parseInt(aqi);
                 if (iaqi >= 0 && iaqi <= 50) {
                     aqiDes = "空气优";
@@ -120,6 +117,4 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
                 cityAndState.setText(data.getCity().getDistrict() + " | " + data.getBaseWeather().getTodayBaseWeather().getWeather());
             }
         }
-
-    }
 }

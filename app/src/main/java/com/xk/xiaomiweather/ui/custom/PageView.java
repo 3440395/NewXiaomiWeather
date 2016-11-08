@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,9 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private MainView mainView;
     //上次刷新距离现在几分钟  可刷新 否则不刷新
     private int lastRefresh = 1;
+    private WeatherItemView weatherItemView1;
+    private WeatherItemView weatherItemView;
+    private WeatherItemView weatherItemView2;
 
     public PageView(Context context, City city) {
         super(context);
@@ -194,13 +198,49 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         mainView.setLayoutParams(mainViewLayoutParams);
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        PullLoadingView view = new PullLoadingView(context, this, maxPullHeight);
+        linearLayout.setBackgroundColor(0xffEFEFEF);
+        PullLoadingView pullLoadingView = new PullLoadingView(context, this, maxPullHeight);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, maxPullHeight);
-        view.setLayoutParams(layoutParams);
-        linearLayout.addView(view);
-        linearLayout.addView(mainView);
+        pullLoadingView.setLayoutParams(layoutParams);
 
+
+        //添加天气item
+        ViewGroup.LayoutParams weatherItemViewLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 229);
+        weatherItemView = new WeatherItemView(context,0);
+        weatherItemView.setLayoutParams(weatherItemViewLayoutParams);
+        weatherItemView1 = new WeatherItemView(context,1);
+        weatherItemView1.setLayoutParams(weatherItemViewLayoutParams);
+        weatherItemView2 = new WeatherItemView(context,2);
+        weatherItemView2.setLayoutParams(weatherItemViewLayoutParams);
+
+        //添加几天趋势预报
+        DetailItem detailItem = new DetailItem(context, "7天趋势预报");
+        ViewGroup.LayoutParams detailItemLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+        detailItem.setLayoutParams(detailItemLayoutParams);
+
+        linearLayout.addView(pullLoadingView);
+        linearLayout.addView(mainView);
+        linearLayout.addView(weatherItemView);
+        linearLayout.addView(weatherItemView1);
+        linearLayout.addView(weatherItemView2);
+        linearLayout.addView(detailItem);
         TextView textView = new TextView(context);
+
+        //添加24小时预报title
+        TitleItem titleItem = new TitleItem(context, "24小时预报");
+        LinearLayout.LayoutParams titleItemLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+        titleItemLayoutParams.topMargin=30;
+        titleItem.setLayoutParams(titleItemLayoutParams);
+        linearLayout.addView(titleItem);
+
+        //添加24小时预报图表（假的）
+        ImageView diagram24Hours = new ImageView(context);
+        diagram24Hours.setScaleType(ImageView.ScaleType.FIT_XY);
+        LinearLayout.LayoutParams diagram24HoursLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 546);
+        diagram24Hours.setImageResource(R.mipmap.test1);
+        diagram24Hours.setLayoutParams(diagram24HoursLayoutParams);
+        linearLayout.addView(diagram24Hours);
+
 
         textView.setTextSize(30);
         textView.setText("adfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfa");
@@ -247,8 +287,13 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
-        mainView.update(data);
+        if (data != null&&data.getBaseWeather().getFutureDayBaseWeathers().size()>0) {
+            mainView.update(data);
+            weatherItemView.update(data);
+            weatherItemView1.update(data);
+            weatherItemView2.update(data);
 
+        }
     }
 
     /**
