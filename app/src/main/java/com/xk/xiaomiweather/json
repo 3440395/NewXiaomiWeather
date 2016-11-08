@@ -1,3 +1,12 @@
+
+  dressing_index（穿衣指数）='较冷',
+  dressing_advice='建议着厚外套加毛衣等服装。年老体弱者宜着大衣、呢外套加羊毛衫。',
+  uv_index（紫外线指数）='最弱',
+  wash_index（洗车指数）='较不宜',
+  travel_index（出行指数）='较不宜',
+  exercise_index(运动指数)='较不宜',
+
+
 //基础天气=====:
 //{
 //  "resultcode": "200",

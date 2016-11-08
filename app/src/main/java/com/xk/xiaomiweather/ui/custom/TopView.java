@@ -69,7 +69,6 @@ public class TopView extends RelativeLayout{
 
 
     public void setText(String city,String temp){
-        Log.e("TopView","被设置了"+city);
         if (temp.equals("")) {
             textView.setText(" "+city);
         }else{

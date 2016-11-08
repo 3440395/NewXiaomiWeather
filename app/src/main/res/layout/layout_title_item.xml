@@ -19,7 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="20px"
         android:layout_toRightOf="@id/title"
-        android:background="#8a8a8a"
+        android:background="#e7e7e7"
         android:visibility="invisible" />
 
     <TextView

@@ -62,6 +62,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private WeatherItemView weatherItemView1;
     private WeatherItemView weatherItemView;
     private WeatherItemView weatherItemView2;
+    private TitleItem titleItem2;
 
     public PageView(Context context, City city) {
         super(context);
@@ -202,36 +203,33 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         PullLoadingView pullLoadingView = new PullLoadingView(context, this, maxPullHeight);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, maxPullHeight);
         pullLoadingView.setLayoutParams(layoutParams);
-
+        linearLayout.addView(pullLoadingView);
+        linearLayout.addView(mainView);
 
         //添加天气item
         ViewGroup.LayoutParams weatherItemViewLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 229);
-        weatherItemView = new WeatherItemView(context,0);
+        weatherItemView = new WeatherItemView(context, 0);
         weatherItemView.setLayoutParams(weatherItemViewLayoutParams);
-        weatherItemView1 = new WeatherItemView(context,1);
+        weatherItemView1 = new WeatherItemView(context, 1);
         weatherItemView1.setLayoutParams(weatherItemViewLayoutParams);
-        weatherItemView2 = new WeatherItemView(context,2);
+        weatherItemView2 = new WeatherItemView(context, 2);
         weatherItemView2.setLayoutParams(weatherItemViewLayoutParams);
 
-        //添加几天趋势预报
-        DetailItem detailItem = new DetailItem(context, "7天趋势预报");
-        ViewGroup.LayoutParams detailItemLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
-        detailItem.setLayoutParams(detailItemLayoutParams);
-
-        linearLayout.addView(pullLoadingView);
-        linearLayout.addView(mainView);
         linearLayout.addView(weatherItemView);
         linearLayout.addView(weatherItemView1);
         linearLayout.addView(weatherItemView2);
-        linearLayout.addView(detailItem);
-        TextView textView = new TextView(context);
+        //添加几天趋势预报
+        DetailItem detailItem1 = new DetailItem(context, "7天趋势预报");
+        ViewGroup.LayoutParams detailItemLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+        detailItem1.setLayoutParams(detailItemLayoutParams);
+        linearLayout.addView(detailItem1);
 
         //添加24小时预报title
-        TitleItem titleItem = new TitleItem(context, "24小时预报");
+        TitleItem titleItem1 = new TitleItem(context, "24小时预报");
         LinearLayout.LayoutParams titleItemLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
-        titleItemLayoutParams.topMargin=30;
-        titleItem.setLayoutParams(titleItemLayoutParams);
-        linearLayout.addView(titleItem);
+        titleItemLayoutParams.topMargin = 30;
+        titleItem1.setLayoutParams(titleItemLayoutParams);
+        linearLayout.addView(titleItem1);
 
         //添加24小时预报图表（假的）
         ImageView diagram24Hours = new ImageView(context);
@@ -241,7 +239,25 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         diagram24Hours.setLayoutParams(diagram24HoursLayoutParams);
         linearLayout.addView(diagram24Hours);
 
+        //添加 空气质量 title
+        titleItem2 = new TitleItem(context, "空气质量");
+        titleItem2.setLayoutParams(titleItemLayoutParams);
+        linearLayout.addView(titleItem2);
 
+        //添加空气质量图表（假的）
+        ImageView airQuality = new ImageView(context);
+        airQuality.setScaleType(ImageView.ScaleType.FIT_XY);
+        LinearLayout.LayoutParams airQualityLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 442);
+        airQuality.setImageResource(R.mipmap.test2);
+        airQuality.setLayoutParams(airQualityLayoutParams);
+        linearLayout.addView(airQuality);
+
+        //添加空气质量预报详情
+        DetailItem detailItem2 = new DetailItem(context, "空气质量详情");
+        detailItem2.setLayoutParams(detailItemLayoutParams);
+        linearLayout.addView(detailItem2);
+
+        TextView textView = new TextView(context);
         textView.setTextSize(30);
         textView.setText("adfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfaadfadfa");
         linearLayout.addView(textView);
@@ -287,12 +303,15 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
-        if (data != null&&data.getBaseWeather().getFutureDayBaseWeathers().size()>0) {
+        if (data != null && data.getBaseWeather().getFutureDayBaseWeathers().size() > 0) {
+            Log.e("PageView","update"+data.getBaseWeather().getTodayBaseWeather());
             mainView.update(data);
             weatherItemView.update(data);
             weatherItemView1.update(data);
             weatherItemView2.update(data);
-
+        }
+        if (data != null && data.getAqiWeather().getCurrentAQIWeather() != null) {
+            titleItem2.update(data.getAqiWeather().getCurrentAQIWeather());
         }
     }
 

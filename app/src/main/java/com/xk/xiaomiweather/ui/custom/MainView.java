@@ -87,7 +87,18 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
+        cityAndState.setText(data.getCity().getDistrict());
+        if (data.getBaseWeather().getCurrentBaseWeather() != null) {
+
+            tempTextView.setText(data.getBaseWeather().getCurrentBaseWeather().getTemp() + "°");
+
+            wind_direction.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_direction());
+            wind_strength.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_strength());
+            humidity.setText(data.getBaseWeather().getCurrentBaseWeather().getHumidity());
+        }
+        if (data.getAqiWeather().getCurrentAQIWeather() != null) {
             String aqi = data.getAqiWeather().getCurrentAQIWeather().getAQI();
+
             String aqiDes;
             if (aqi != null) {
                 int iaqi = Integer.parseInt(aqi);
@@ -105,10 +116,7 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
                 this.aqi.setText(aqiDes);
                 aqi_index.setText(aqi);
             }
-            wind_direction.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_direction());
-            wind_strength.setText(data.getBaseWeather().getCurrentBaseWeather().getWind_strength());
-            humidity.setText(data.getBaseWeather().getCurrentBaseWeather().getHumidity());
-            tempTextView.setText(data.getBaseWeather().getCurrentBaseWeather().getTemp() + "°");
+
             String[] split = null;
             if (data.getBaseWeather().getTodayBaseWeather().getWeather().contains("-")) {
                 split = data.getBaseWeather().getTodayBaseWeather().getWeather().split("-");
@@ -117,4 +125,5 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
                 cityAndState.setText(data.getCity().getDistrict() + " | " + data.getBaseWeather().getTodayBaseWeather().getWeather());
             }
         }
+    }
 }

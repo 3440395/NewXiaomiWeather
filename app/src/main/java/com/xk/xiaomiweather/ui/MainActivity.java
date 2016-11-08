@@ -109,9 +109,9 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
             ExecutorUtil.getInstance().runOnSingleThread(new Runnable() {
                 @Override
                 public void run() {
-                    CityManager.getInstance().addCity("青岛");
-                    CityManager.getInstance().addCity("南京");
-                    CityManager.getInstance().addCity("天津");
+                    CityManager.getInstance().addCity("朝阳");
+                    CityManager.getInstance().addCity("太原");
+                    CityManager.getInstance().addCity("离石");
                     List<City> allCity1 = CityManager.getInstance().getAllCity();
                     for (City city : allCity1) {
                         pages.add(new PageView(MainActivity.this, city));

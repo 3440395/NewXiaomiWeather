@@ -48,7 +48,7 @@
         android:textColor="#000" />
     <View
         android:id="@+id/bottomLine"
-        android:background="#8a8a8a"
+        android:background="#e7e7e7"
         android:layout_alignParentBottom="true"
         android:layout_width="855px"
         android:layout_alignParentRight="true"

@@ -26,7 +26,7 @@ public class DetailItem  extends RelativeLayout {
         View line = new View(getContext());
         ViewGroup.LayoutParams lineLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
         line.setLayoutParams(lineLayoutParams);
-        line.setBackgroundColor(0xff8a8a8a);
+        line.setBackgroundColor(0xffe7e7e7);
         addView(line);
         textView = new TextView(getContext());
         textView.setText(content);
