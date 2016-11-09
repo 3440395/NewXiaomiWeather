@@ -83,8 +83,16 @@ public class MToolBar extends RelativeLayout {
         contain.addView(title);
 
 
-        TextView search = new TextView(getContext());
-        search.setHint("查询国内城市");
+        SearchView searchView = new SearchView(getContext());
+        RelativeLayout.LayoutParams searchViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        searchViewParams.addRule(CENTER_VERTICAL,TRUE);
+        searchViewParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
+        searchViewParams.addRule(ALIGN_PARENT_LEFT,TRUE);
+        searchViewParams.leftMargin=120;
+        searchViewParams.rightMargin=40;
+        searchView.setLayoutParams(searchViewParams);
+        contain.addView(searchView);
+
 
         addView(contain);
     }
