@@ -22,6 +22,7 @@ import com.xk.xiaomiweather.ui.custom.PageView;
 import com.xk.xiaomiweather.ui.custom.TopView;
 import com.xk.xiaomiweather.ui.util.ExecutorUtil;
 import com.xk.xiaomiweather.ui.util.ScreenManager;
+import com.xk.xiaomiweather.ui.util.StatusColorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatusColorUtil.setStatusBarTextStyle(this,true);
         initView();
         initData();
         initListener();
@@ -148,9 +150,10 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
             topView.setAlpha(0);
         } else if (progress > completeShowTopView) {
             topView.setAlpha(1);
+
         } else {
             topView.setAlpha((400 - completeShowTopView + progress) / 400f);
-        }
+                 }
 //        440--->0
 //        840--->1
     }

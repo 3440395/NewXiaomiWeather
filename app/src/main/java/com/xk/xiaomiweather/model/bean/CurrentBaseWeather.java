@@ -1,10 +1,12 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
+
 /**
  * 实况天气
  * Created by xuekai on 2016/11/2.
  */
-public class CurrentBaseWeather {
+public class CurrentBaseWeather  implements Serializable {
     /**
      * 当前温度
      */

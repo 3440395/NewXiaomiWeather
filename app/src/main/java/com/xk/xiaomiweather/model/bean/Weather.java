@@ -1,11 +1,13 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
+
 /**
  * 天气信息（针对某一个城市）
  * Created by xuekai on 2016/11/1.
  */
 
-public class Weather {
+public class Weather implements Serializable{
     private City city;
     private BaseWeather baseWeather;
     private AQIWeather aqiWeather;

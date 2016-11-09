@@ -1,10 +1,12 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by xk on 2016/11/2 20:45.
  */
 
-public class City {
+public class City  implements Serializable {
     private String province;//省
     private String district;//县（地区）
     private String city;//市

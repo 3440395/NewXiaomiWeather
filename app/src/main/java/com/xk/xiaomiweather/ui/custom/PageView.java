@@ -3,6 +3,7 @@ package com.xk.xiaomiweather.ui.custom;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.hardware.SensorManager;
 import android.support.annotation.UiThread;
@@ -25,8 +26,10 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.City;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.model.manager.WeatherManager;
+import com.xk.xiaomiweather.ui.AirQualityActivity;
 import com.xk.xiaomiweather.ui.IVUpdateable;
 import com.xk.xiaomiweather.ui.MainActivity;
+import com.xk.xiaomiweather.ui.WeatherForecastActivity;
 import com.xk.xiaomiweather.ui.callback.OnPullStateChangeListener;
 import com.xk.xiaomiweather.ui.util.ExecutorUtil;
 import com.xk.xiaomiweather.ui.util.ScreenManager;
@@ -69,12 +72,45 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private AdviceItemView uvItemView;
     private AdviceItemView exerciseItemView;
     private AdviceItemView washItemView;
+    private DetailItem detailItem1;
+    private DetailItem detailItem2;
+    private ImageView airQuality;
 
     public PageView(Context context, City city) {
         super(context);
         this.context = context;
         this.city = city;
         init();
+        initListener();
+    }
+
+    private void initListener() {
+        detailItem1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WeatherForecastActivity.class);
+                intent.putExtra("data", weather);
+                context.startActivity(intent);
+            }
+        });
+        airQuality.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AirQualityActivity.class);
+                intent.putExtra("data", weather);
+                context.startActivity(intent);
+            }
+        });
+        detailItem2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AirQualityActivity.class);
+                intent.putExtra("data", weather);
+
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     public PageView(Context context, AttributeSet attrs) {
@@ -225,7 +261,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(weatherItemView1);
         linearLayout.addView(weatherItemView2);
         //添加几天趋势预报
-        DetailItem detailItem1 = new DetailItem(context, "7天趋势预报");
+        detailItem1 = new DetailItem(context, "7天趋势预报");
         ViewGroup.LayoutParams detailItemLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
         detailItem1.setLayoutParams(detailItemLayoutParams);
         linearLayout.addView(detailItem1);
@@ -251,7 +287,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(titleItem2);
 
         //添加空气质量图表（假的）
-        ImageView airQuality = new ImageView(context);
+        airQuality = new ImageView(context);
         airQuality.setScaleType(ImageView.ScaleType.FIT_XY);
         LinearLayout.LayoutParams airQualityLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 442);
         airQuality.setImageResource(R.mipmap.test2);
@@ -259,7 +295,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(airQuality);
 
         //添加空气质量预报详情
-        DetailItem detailItem2 = new DetailItem(context, "空气质量详情");
+        detailItem2 = new DetailItem(context, "空气质量详情");
         detailItem2.setLayoutParams(detailItemLayoutParams);
         linearLayout.addView(detailItem2);
 
@@ -353,6 +389,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
+        weather = data;
         if (data != null && data.getBaseWeather().getFutureDayBaseWeathers().size() > 0) {
             Log.e("PageView", "update" + data.getBaseWeather().getTodayBaseWeather());
             mainView.update(data);

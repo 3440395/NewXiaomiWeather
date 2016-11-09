@@ -1,10 +1,12 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
+
 /**
  * 当前的aqi
  * Created by xuekai on 2016/11/2.
  */
-public class CurrentAQIWeather {
+public class CurrentAQIWeather  implements Serializable {
     private String PM25;
     private String time;
     private String rdesc;

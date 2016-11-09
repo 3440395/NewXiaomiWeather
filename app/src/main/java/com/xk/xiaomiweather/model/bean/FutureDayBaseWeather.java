@@ -1,12 +1,13 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Created by xuekai on 2016/11/2.
  */
 
-public class FutureDayBaseWeather {
+public class FutureDayBaseWeather  implements Serializable {
 //        "temperature": "8℃~20℃",
 //        "weather": "晴转霾",
 //        "weather_id": {

@@ -1,6 +1,7 @@
 package com.xk.xiaomiweather.ui.custom;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
+import com.xk.xiaomiweather.ui.WeatherForecastActivity;
 
 import org.w3c.dom.Text;
 
@@ -31,6 +33,7 @@ public class WeatherItemView extends RelativeLayout implements IVUpdateable<Weat
     private TextView temp;
     private TextView weather;
     private int index;
+    private Weather data;
 
     public WeatherItemView(Context context,int index) {
         super(context);
@@ -39,6 +42,14 @@ public class WeatherItemView extends RelativeLayout implements IVUpdateable<Weat
     }
 
     private void init() {
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), WeatherForecastActivity.class);
+                intent.putExtra("data",data);
+                getContext().startActivity(intent);
+            }
+        });
         item = View.inflate(getContext(), R.layout.layout_weather_item, null);
 
         bottomLine = item.findViewById(R.id.bottomLine);
@@ -61,6 +72,7 @@ public class WeatherItemView extends RelativeLayout implements IVUpdateable<Weat
 
     @Override
     public void update(Weather data) {
+        this.data=data;
         FutureDayBaseWeather futureDayBaseWeather = data.getBaseWeather().getFutureDayBaseWeathers().get(index);
         time.setText(index==0?"今天":(index==1?"明天":futureDayBaseWeather.getWeek()));
         weather.setText(futureDayBaseWeather.getWeather());

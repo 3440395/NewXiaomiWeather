@@ -1,12 +1,13 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * 今天的天气
  * Created by xuekai on 2016/11/2.
  */
-public class TodayBaseWeather {
+public class TodayBaseWeather  implements Serializable {
 
 
     /**

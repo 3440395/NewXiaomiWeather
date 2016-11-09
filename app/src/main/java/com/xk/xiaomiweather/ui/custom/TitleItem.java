@@ -56,9 +56,9 @@ public class TitleItem extends FrameLayout implements IVUpdateable<CurrentAQIWea
                 aqiDes = "良";
 
             } else if (iaqi > 100 && iaqi <= 150) {
-                aqiDes = "中";
+                aqiDes = "中度污染";
             } else {
-                aqiDes = "差";
+                aqiDes = "重度污染";
             }
             line.setVisibility(VISIBLE);
             aqi_des.setVisibility(VISIBLE);

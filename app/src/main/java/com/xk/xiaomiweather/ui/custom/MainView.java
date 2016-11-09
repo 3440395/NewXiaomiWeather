@@ -1,6 +1,8 @@
 package com.xk.xiaomiweather.ui.custom;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.Weather;
+import com.xk.xiaomiweather.ui.CityManageActivity;
 import com.xk.xiaomiweather.ui.IVUpdateable;
 
 import org.w3c.dom.Text;
@@ -30,16 +33,27 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
     private TextView humidity;
     private TextView tempTextView;
     private TextView cityAndState;
+    private ImageView more;
 
     public MainView(Context context) {
         super(context);
         init();
+        initListener();
+    }
+
+    private void initListener() {
+        more.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Activity)getContext()).startActivity(new Intent(getContext(),CityManageActivity.class));
+            }
+        });
     }
 
     private void init() {
         setBackgroundColor(0xff2FB184);
 
-        ImageView more = new ImageView(getContext());
+        more = new ImageView(getContext());
         more.setImageResource(R.mipmap.icon_more);
         LayoutParams moreLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         moreLayoutParams.topMargin = 115;

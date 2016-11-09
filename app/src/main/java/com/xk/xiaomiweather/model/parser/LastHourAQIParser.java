@@ -36,6 +36,7 @@ public class LastHourAQIParser extends BaseParser<Map<String, String>, JSONObjec
     protected Map<String, String> parser(Response<JSONObject> response)  {
         if (response.get() != null) {
             JSONObject object = response.get();
+            Log.e("LastHourAQIParser","parser"+object.toString());
             try {
                 if (object.getInt("rcode")==200) {
                     JSONArray historyJson = object.getJSONArray("history");

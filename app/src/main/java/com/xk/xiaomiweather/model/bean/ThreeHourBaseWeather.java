@@ -1,10 +1,12 @@
 package com.xk.xiaomiweather.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by xuekai on 2016/11/2.
  */
 
-public class ThreeHourBaseWeather {
+public class ThreeHourBaseWeather  implements Serializable {
     //"weatherid": "00",/*天气标识ID*/
     //"weather": "晴", /*天气*/
     //"temp1": "27", /*低温*/
