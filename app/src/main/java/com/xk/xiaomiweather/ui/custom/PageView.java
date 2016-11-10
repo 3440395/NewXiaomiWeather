@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.City;
+import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.model.manager.WeatherManager;
 import com.xk.xiaomiweather.ui.AirQualityActivity;
@@ -35,7 +36,12 @@ import com.xk.xiaomiweather.ui.util.ExecutorUtil;
 import com.xk.xiaomiweather.ui.util.ScreenManager;
 import com.xk.xiaomiweather.ui.util.SharedPrenfenceUtil;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+
 import static android.media.CamcorderProfile.get;
+import static com.xk.xiaomiweather.R.id.pm10;
 
 /**
  * 每一页的view
@@ -74,7 +80,9 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private AdviceItemView washItemView;
     private DetailItem detailItem1;
     private DetailItem detailItem2;
-    private ImageView airQuality;
+    private DialView airQuality1;
+    private LinearLayout airQualitys;
+    private DialView airQuality2;
 
     public PageView(Context context, City city) {
         super(context);
@@ -93,7 +101,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
                 context.startActivity(intent);
             }
         });
-        airQuality.setOnClickListener(new OnClickListener() {
+        airQualitys.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, AirQualityActivity.class);
@@ -286,13 +294,39 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         titleItem2.setLayoutParams(titleItemLayoutParams);
         linearLayout.addView(titleItem2);
 
-        //添加空气质量图表（假的）
-        airQuality = new ImageView(context);
-        airQuality.setScaleType(ImageView.ScaleType.FIT_XY);
-        LinearLayout.LayoutParams airQualityLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 442);
-        airQuality.setImageResource(R.mipmap.test2);
-        airQuality.setLayoutParams(airQualityLayoutParams);
-        linearLayout.addView(airQuality);
+
+        //添加横线
+        View line= new View(context);
+        LinearLayout.LayoutParams lineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        line.setBackgroundColor(0xffe7e7e7);
+        line.setLayoutParams(lineParams);
+        linearLayout.addView(line);
+
+
+        //添加空气质量图表的paraent
+        airQualitys = new LinearLayout(context);
+        airQualitys.setBackgroundColor(0xffffffff);
+        LinearLayout.LayoutParams airQualitysLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 440);
+        airQualitys.setOrientation(LinearLayout.HORIZONTAL);
+        airQualitys.setGravity(Gravity.CENTER_HORIZONTAL);
+        airQualitys.setLayoutParams(airQualitysLayoutParams);
+
+        //添加空气质量图表1
+        airQuality1 = new DialView(context);
+        LinearLayout.LayoutParams airQualityLayoutParams = new LinearLayout.LayoutParams(310, 320);
+        airQualityLayoutParams.gravity=Gravity.CENTER_VERTICAL;
+        airQualityLayoutParams.leftMargin=75;
+        airQualityLayoutParams.rightMargin=75;
+        airQuality1.setLayoutParams(airQualityLayoutParams);
+        airQualitys.addView(airQuality1);
+        //添加空气质量图表2
+        airQuality2 = new DialView(context);
+        airQuality2.setLayoutParams(airQualityLayoutParams);
+        airQualitys.addView(airQuality2);
+
+
+
+        linearLayout.addView(airQualitys);
 
         //添加空气质量预报详情
         detailItem2 = new DetailItem(context, "空气质量详情");
@@ -403,7 +437,45 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
             washItemView.update(data.getBaseWeather().getTodayBaseWeather());
         }
         if (data != null && data.getAqiWeather().getCurrentAQIWeather() != null) {
-            titleItem2.update(data.getAqiWeather().getCurrentAQIWeather());
+            CurrentAQIWeather currentAQIWeather = data.getAqiWeather().getCurrentAQIWeather();
+            titleItem2.update(currentAQIWeather);
+            airQuality1.updata(currentAQIWeather.getAQI(),"AQI","空气质量指数",0,400);
+
+
+            float max=0;
+            String des="";
+
+            String pm10 = currentAQIWeather.getPM10();
+            String pm25 = currentAQIWeather.getPM25();
+            String co = currentAQIWeather.getCO();
+            String so2 = currentAQIWeather.getSO2();
+            String o3 = currentAQIWeather.getO3();
+            String no2 = currentAQIWeather.getNO2();
+
+            if (Float.parseFloat(pm10)>max) {
+                max=Float.parseFloat(pm10);
+                des="PM10";
+            }if (Float.parseFloat(pm25)>max) {
+                des="PM2.5";
+
+                max=Float.parseFloat(pm25);
+            }if (Float.parseFloat(co)>max) {
+                des="CO";
+
+                max=Float.parseFloat(co);
+            }if (Float.parseFloat(so2)>max) {
+                des="SO2";
+                max=Float.parseFloat(so2);
+            }if (Float.parseFloat(o3)>max) {
+                des="O3";
+                max=Float.parseFloat(o3);
+            }
+            if (Float.parseFloat(no2) > max) {
+                des="NO2";
+                max = Float.parseFloat(no2);
+            }
+
+            airQuality2.updata(max+"",des,"首要污染物",0,400);
         }
     }
 
@@ -448,8 +520,6 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
                         SharedPrenfenceUtil.putString(context, city.getDistrict(), System.currentTimeMillis() + "");
                         //刷新成功了  更新ui
                         update(weather);
-
-                        Toast.makeText(context, "获取天气成功" + weather.getCity().getDistrict() + "" + weather.getBaseWeather().getCurrentBaseWeather().getHumidity(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

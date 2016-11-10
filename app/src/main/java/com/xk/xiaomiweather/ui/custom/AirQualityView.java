@@ -16,6 +16,7 @@ import com.xk.xiaomiweather.ui.IVUpdateable;
 
 import static com.xk.xiaomiweather.R.id.aqi_des;
 import static com.xk.xiaomiweather.R.id.line;
+import static com.xk.xiaomiweather.R.mipmap.test3;
 
 /**
  * Created by xuekai on 2016/11/9.
@@ -27,6 +28,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
     private TextView cityName;
     private TextView publish;
     private PolluteDetialView polluteDetialView;
+    private DialView dialView;
 
     public AirQualityView(Context context) {
         super(context);
@@ -79,15 +81,13 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         addView(polluteDetialView);
 
         //添加aqi 图表
-        ImageView test3 = new ImageView(getContext());
-        test3.setImageResource(R.mipmap.test3);
-        test3.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        LayoutParams test3Params = new LayoutParams(350, 350);
-        test3Params.addRule(ALIGN_PARENT_RIGHT, TRUE);
-        test3Params.rightMargin = 100;
-        test3Params.topMargin = 430;
-        test3.setLayoutParams(test3Params);
-        addView(test3);
+        dialView = new DialView(getContext());
+        LayoutParams dialViewParams = new LayoutParams(350, 350);
+        dialViewParams.addRule(ALIGN_PARENT_RIGHT, TRUE);
+        dialViewParams.topMargin = 430;
+        dialViewParams.rightMargin = 100;
+        dialView.setLayoutParams(dialViewParams);
+        addView(dialView);
 
         //添加 tab
         TabStripView tabStripView = new TabStripView(getContext(), "未来5天预报", "过去24小时");
@@ -111,7 +111,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         //添加曲线图
         ImageView test4 = new ImageView(getContext());
         test4.setImageResource(R.mipmap.test4);
-        test3.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        test4.setScaleType(ImageView.ScaleType.CENTER_CROP);
         LayoutParams test4Params = new LayoutParams(905, 400);
         test4Params.addRule(CENTER_HORIZONTAL, TRUE);
         test4Params.topMargin = 1110;
@@ -133,6 +133,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
 
     @Override
     public void update(Weather data) {
+        dialView.updata(data.getAqiWeather().getCurrentAQIWeather().getAQI(),"AQI","空气质量指数",0,400);
         cityName.setText(data.getCity().getDistrict());
         publish.setText("环境云 " + data.getAqiWeather().getCurrentAQIWeather().getTime().substring(8) + ":00发布");
         polluteDetialView.update(data.getAqiWeather().getCurrentAQIWeather());

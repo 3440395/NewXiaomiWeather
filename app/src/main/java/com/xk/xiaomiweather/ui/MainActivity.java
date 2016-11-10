@@ -18,6 +18,7 @@ import com.xk.xiaomiweather.model.manager.CityManager;
 import com.xk.xiaomiweather.ui.adapter.ViewPagerAdapter;
 import com.xk.xiaomiweather.ui.callback.OnPageViewScrollChange;
 import com.xk.xiaomiweather.ui.callback.OnRefreshFinish;
+import com.xk.xiaomiweather.ui.custom.HourWeatherItem;
 import com.xk.xiaomiweather.ui.custom.PageView;
 import com.xk.xiaomiweather.ui.custom.TopView;
 import com.xk.xiaomiweather.ui.util.ExecutorUtil;
@@ -97,6 +98,13 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
 //        city3.setEnvicloudId("101100101");
 //        PageView pageView3 = new PageView(this, city3);
 
+
+        HourWeatherItem hourWeatherItem = new HourWeatherItem(this);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(200, 546);
+        layoutParams.leftMargin=100;
+        layoutParams.topMargin=200;
+        hourWeatherItem.setLayoutParams(layoutParams);
+        root.addView(hourWeatherItem);
 
     }
 

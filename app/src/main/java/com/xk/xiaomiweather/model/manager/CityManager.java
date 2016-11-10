@@ -62,6 +62,15 @@ public class CityManager {
         return city;
     }
 
+
+    public City searchCity(String district){
+        CityParser cityParser = new CityParser();
+        cityParser.setRequestParams(district);
+        City city = cityParser.getData();
+        return city;
+
+    }
+
     /**
      * 通过城市名删除一个城市(同时还有把其他表中的数据删除)
      *
