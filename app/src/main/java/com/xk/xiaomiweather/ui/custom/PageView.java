@@ -302,7 +302,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
         //添加横线
         View line1= new View(context);
-        line.setLayoutParams(lineLayoutParams);
+        line1.setLayoutParams(lineLayoutParams);
         linearLayout.addView(line1);
 
 
