@@ -78,6 +78,12 @@ public class HoursTempGraphView extends RecyclerView {
             }
             int temp = (Integer.parseInt(data.get(position).getTemp1()) + Integer.parseInt(data.get(position).getTemp2())) / 2;
             holder.hourWeatherItem.setCurrentTemp(temp);
+
+            if(data.get(position).getEh().contains("00")||data.get(position).getEh().contains("01")||data.get(position).getEh().contains("02")||position==0||position==data.size()-1){
+                holder.hourWeatherItem.setDrawDotte(true);
+            }else{
+                holder.hourWeatherItem.setDrawDotte(false);
+            }
         }
 
         @Override

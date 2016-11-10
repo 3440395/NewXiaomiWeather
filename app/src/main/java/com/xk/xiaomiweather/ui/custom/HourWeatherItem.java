@@ -3,7 +3,10 @@ package com.xk.xiaomiweather.ui.custom;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PathEffect;
 import android.util.Log;
 import android.view.View;
 
@@ -15,8 +18,8 @@ public class HourWeatherItem extends View {
     private int maxTemp = 50;//最高温度
     private int minTemp = 0;//最低温度
     private int currentTemp = 15;//当前温度
-    private int lastTemp=10;//上一个温度
-    private int nextTemp=10;//下一个温度
+    private int lastTemp = 10;//上一个温度
+    private int nextTemp = 10;//下一个温度
     private String time;//时间
     private Paint mPaint;
     private int viewHeight;
@@ -26,9 +29,13 @@ public class HourWeatherItem extends View {
     private int pointX;//所有点的x坐标
     private int pointY;//当前点的Y
 
-
+    private boolean drawDotte = false;
     private boolean drawLeftLine = true;//是否画左边的线
     private boolean drawRightLine = true;//是否画右边的线
+
+    public void setDrawDotte(boolean drawDotte) {
+        this.drawDotte = drawDotte;
+    }
 
     public HourWeatherItem(Context context) {
         super(context);
@@ -69,9 +76,31 @@ public class HourWeatherItem extends View {
 
         drawTime(canvas);
         drawLine(canvas);
-        drawPoint(canvas);
         drawGraph(canvas);
+        drawPoint(canvas);
         drawTemp(canvas);
+        drawDotte(canvas);
+    }
+
+    private void drawDotte(Canvas canvas) {
+        if (drawDotte) {
+            mPaint.setStyle(Paint.Style.STROKE);
+            mPaint.setColor(0xffD3D3D3);
+            mPaint.setStrokeWidth(2);
+
+            Path path = new Path();
+            path.moveTo(viewWidth / 2, 425);
+            path.lineTo(viewWidth / 2, pointY+15);
+            PathEffect effects = new DashPathEffect(new float[]{10,10,10,10},5);
+            mPaint.setPathEffect(effects);
+            canvas.drawPath(path, mPaint);
+
+
+
+//            mPaint.setStrokeWidth(2);
+//            mPaint.setStyle(Paint.Style.STROKE);
+//            canvas.drawLine(viewWidth / 2, 425, viewWidth / 2, pointY+15, mPaint);
+        }
     }
 
     private void drawTemp(Canvas canvas) {
@@ -81,8 +110,8 @@ public class HourWeatherItem extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
-        float baseLine1 = pointY - fontMetrics.bottom*4;
-        canvas.drawText(currentTemp+"°", viewWidth / 2, baseLine1, mPaint);
+        float baseLine1 = pointY - fontMetrics.bottom * 4;
+        canvas.drawText(currentTemp + "°", viewWidth / 2, baseLine1, mPaint);
     }
 
     public void setLastTemp(int lastTemp) {
@@ -95,27 +124,36 @@ public class HourWeatherItem extends View {
 
     /**
      * 画折线
+     *
      * @param canvas
      */
     private void drawGraph(Canvas canvas) {
+        mPaint.setPathEffect(null);
+
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(0xff24C3F1);
         mPaint.setStrokeWidth(3);
         mPaint.setAntiAlias(true);
         if (drawLeftLine) {
-            float middleTemp =currentTemp-(currentTemp - lastTemp) / 2f;
-            Log.e("HourWeatherItem","drawGraph"+middleTemp);
+            float middleTemp = currentTemp - (currentTemp - lastTemp) / 2f;
+            Log.e("HourWeatherItem", "drawGraph" + middleTemp);
             float middleY = ((pointBottomY - pointTopY) * 1f / (maxTemp - minTemp) * (maxTemp - middleTemp + minTemp) + pointTopY);
-            canvas.drawLine(0, middleY, pointX-15, pointY, mPaint);
+            canvas.drawLine(0, middleY, pointX, pointY, mPaint);
         }
         if (drawRightLine) {
-            float middleTemp =currentTemp-  (currentTemp - nextTemp) / 2f;
+            float middleTemp = currentTemp - (currentTemp - nextTemp) / 2f;
             float middleY = ((pointBottomY - pointTopY) * 1f / (maxTemp - minTemp) * (maxTemp - middleTemp + minTemp) + pointTopY);
-            canvas.drawLine(pointX+15, pointY, viewWidth, middleY, mPaint);
+            canvas.drawLine(pointX, pointY, viewWidth, middleY, mPaint);
         }
     }
 
     private void drawPoint(Canvas canvas) {
+        mPaint.setColor(0xffffffff);
+        mPaint.setPathEffect(null);
+
+        mPaint.setStrokeWidth(2);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(pointX, pointY, 15, mPaint);
         mPaint.setColor(0xff24C3F1);
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -124,6 +162,8 @@ public class HourWeatherItem extends View {
 
     private void drawLine(Canvas canvas) {
         mPaint.setColor(0xffD3D3D3);
+        mPaint.setPathEffect(null);
+
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.FILL);
         if (drawLeftLine) {
