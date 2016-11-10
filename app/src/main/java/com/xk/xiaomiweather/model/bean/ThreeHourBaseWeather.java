@@ -1,12 +1,17 @@
 package com.xk.xiaomiweather.model.bean;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static com.xk.xiaomiweather.R.id.co;
 
 /**
  * Created by xuekai on 2016/11/2.
  */
 
-public class ThreeHourBaseWeather  implements Serializable {
+public class ThreeHourBaseWeather  implements Serializable ,Comparable<ThreeHourBaseWeather>{
     //"weatherid": "00",/*天气标识ID*/
     //"weather": "晴", /*天气*/
     //"temp1": "27", /*低温*/
@@ -111,5 +116,20 @@ public class ThreeHourBaseWeather  implements Serializable {
 
     public void setEfdate(String efdate) {
         this.efdate = efdate;
+    }
+
+
+    @Override
+    public int compareTo(ThreeHourBaseWeather another) {
+        String sfdate = another.getSfdate();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        try {
+            Date parse = format.parse(sfdate);
+           return  format.parse(this.getSfdate()).compareTo(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

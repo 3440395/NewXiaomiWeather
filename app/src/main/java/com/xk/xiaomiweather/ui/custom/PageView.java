@@ -83,6 +83,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     private DialView airQuality1;
     private LinearLayout airQualitys;
     private DialView airQuality2;
+    private HoursTempGraphView hoursTempGraphView;
 
     public PageView(Context context, City city) {
         super(context);
@@ -281,13 +282,17 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         titleItem1.setLayoutParams(titleItemLayoutParams);
         linearLayout.addView(titleItem1);
 
-        //添加24小时预报图表（假的）
-        ImageView diagram24Hours = new ImageView(context);
-        diagram24Hours.setScaleType(ImageView.ScaleType.FIT_XY);
-        LinearLayout.LayoutParams diagram24HoursLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 546);
-        diagram24Hours.setImageResource(R.mipmap.test1);
-        diagram24Hours.setLayoutParams(diagram24HoursLayoutParams);
-        linearLayout.addView(diagram24Hours);
+        View line = new View(context);
+        line.setBackgroundColor(0xffe7e7e7);
+        LinearLayout.LayoutParams lineLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        line.setLayoutParams(lineLayoutParams);
+        linearLayout.addView(line);
+
+        //添加24小时预报图表
+        hoursTempGraphView = new HoursTempGraphView(context);
+        LinearLayout.LayoutParams hoursTempGraphViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 546);
+        hoursTempGraphView.setLayoutParams(hoursTempGraphViewParams);
+        linearLayout.addView(hoursTempGraphView);
 
         //添加 空气质量 title
         titleItem2 = new TitleItem(context, "空气质量");
@@ -296,11 +301,9 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
 
         //添加横线
-        View line= new View(context);
-        LinearLayout.LayoutParams lineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
-        line.setBackgroundColor(0xffe7e7e7);
-        line.setLayoutParams(lineParams);
-        linearLayout.addView(line);
+        View line1= new View(context);
+        line.setLayoutParams(lineLayoutParams);
+        linearLayout.addView(line1);
 
 
         //添加空气质量图表的paraent
@@ -435,6 +438,10 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
             uvItemView.update(data.getBaseWeather().getTodayBaseWeather());
             exerciseItemView.update(data.getBaseWeather().getTodayBaseWeather());
             washItemView.update(data.getBaseWeather().getTodayBaseWeather());
+
+            hoursTempGraphView.setData(data.getBaseWeather().getThreeHourBaseWeathers());
+
+
         }
         if (data != null && data.getAqiWeather().getCurrentAQIWeather() != null) {
             CurrentAQIWeather currentAQIWeather = data.getAqiWeather().getCurrentAQIWeather();

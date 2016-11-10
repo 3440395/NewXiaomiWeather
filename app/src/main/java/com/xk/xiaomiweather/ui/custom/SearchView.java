@@ -3,6 +3,7 @@ package com.xk.xiaomiweather.ui.custom;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,16 +25,21 @@ public class SearchView extends LinearLayout {
         ImageView icon = new ImageView(getContext());
         LayoutParams iconParams = new LayoutParams(48, 48);
         iconParams.gravity= Gravity.CENTER_VERTICAL;
+        iconParams.leftMargin=10;
         icon.setLayoutParams(iconParams);
         icon.setImageResource(R.mipmap.icon_search);
         addView(icon);
 
-        TextView textView = new TextView(getContext());
+        EditText editText = new EditText(getContext());
+        editText.setGravity(Gravity.CENTER_VERTICAL);
         LayoutParams textViewParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         textViewParams.gravity= Gravity.CENTER_VERTICAL;
-        textView.setLayoutParams(textViewParams);
-        textView.setHint("请输入国家");
-        addView(textView);
+        editText.setLayoutParams(textViewParams);
+        editText.setHint("请输入城市");
+        editText.setTextSize(13);
+        editText.setPadding(5,0-5,0,0-5);
+        editText.setBackground(null);
+        addView(editText);
 
     }
 }
