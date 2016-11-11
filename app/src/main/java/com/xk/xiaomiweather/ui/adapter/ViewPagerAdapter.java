@@ -2,6 +2,7 @@ package com.xk.xiaomiweather.ui.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,12 +27,19 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     public void setViews(List<PageView> views) {
         this.views = views;
+        Log.e("ViewPagerAdapter","setViews"+views.size());
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
         return views.size();
+    }
+
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 
     @Override

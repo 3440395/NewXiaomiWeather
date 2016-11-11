@@ -7,7 +7,6 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -136,7 +135,6 @@ public class HourWeatherItem extends View {
         mPaint.setAntiAlias(true);
         if (drawLeftLine) {
             float middleTemp = currentTemp - (currentTemp - lastTemp) / 2f;
-            Log.e("HourWeatherItem", "drawGraph" + middleTemp);
             float middleY = ((pointBottomY - pointTopY) * 1f / (maxTemp - minTemp) * (maxTemp - middleTemp + minTemp) + pointTopY);
             canvas.drawLine(0, middleY, pointX, pointY, mPaint);
         }

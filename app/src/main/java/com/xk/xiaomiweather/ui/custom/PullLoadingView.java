@@ -66,6 +66,7 @@ public class PullLoadingView extends RelativeLayout {
     private void initListener() {
         parent.setOnPullStateChangeListener(new OnPullStateChangeListener() {
 
+            private String refreshTime;
             private RotateAnimation iconRotateAnimation;
 
             @Override
@@ -79,7 +80,11 @@ public class PullLoadingView extends RelativeLayout {
                     if (iconRotateAnimation != null) {
                         iconRotateAnimation=null;
                     }
-                    String refreshTime = SharedPrenfenceUtil.getString(getContext(), parent.getWeather().getCity().getDistrict());
+                    if (parent.getWeather()==null||parent.getWeather().getCity()==null||parent.getWeather().getCity().getDistrict()==null) {
+                        refreshTime="刚刚刷新";
+                    }else{
+                        refreshTime = SharedPrenfenceUtil.getString(getContext(),parent.getWeather().getCity().getDistrict() );
+                    }
                     if (refreshTime!=null&&!refreshTime.equals("")) {
                         long interval = System.currentTimeMillis() - Long.parseLong(refreshTime);
                         if(interval<(60*1000)){//小于一分钟
@@ -116,7 +121,6 @@ public class PullLoadingView extends RelativeLayout {
         if (firstMeasure) {
             textHeight = refreshText.getMeasuredHeight();
             iconHeight = icon.getMeasuredHeight();
-            Log.e("PullLoadingView","onMeasure");
             firstMeasure=false;
         }
 

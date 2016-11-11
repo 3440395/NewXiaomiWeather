@@ -1,5 +1,6 @@
 package com.xk.xiaomiweather.ui;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,8 @@ import com.xk.xiaomiweather.ui.util.StatusColorUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.xk.xiaomiweather.R.id.weather;
+
 public class MainActivity extends AppCompatActivity implements OnPageViewScrollChange, OnRefreshFinish {
     private List<PageView> pages = new ArrayList<>();
     private ViewPager viewPager;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusColorUtil.setStatusBarTextStyle(this,true);
+        StatusColorUtil.setStatusBarTextStyle(this, true);
         initView();
         initData();
         initListener();
@@ -61,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
                 pages.get(position).onSelected();
                 Weather weather = pages.get(position).getWeather();
                 setTopView(weather);
+                if (weather==null||weather.getBaseWeather()==null||weather.getBaseWeather().getCurrentBaseWeather()==null) {
+                    currentPager.refreshData();
+                }
             }
 
             @Override
@@ -120,9 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
             ExecutorUtil.getInstance().runOnSingleThread(new Runnable() {
                 @Override
                 public void run() {
-                    CityManager.getInstance().addCity("朝阳");
-                    CityManager.getInstance().addCity("太原");
-                    CityManager.getInstance().addCity("离石");
+                    CityManager.getInstance().addCity("北京");
                     List<City> allCity1 = CityManager.getInstance().getAllCity();
                     for (City city : allCity1) {
                         pages.add(new PageView(MainActivity.this, city));
@@ -133,17 +137,24 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
                         public void run() {
                             viewPagerAdapter.notifyDataSetChanged();
                             progressBar.setVisibility(View.GONE);
+                            if (currentPager.getWeather()==null||currentPager.getWeather().getBaseWeather()==null||currentPager.getWeather().getBaseWeather().getCurrentBaseWeather()==null) {
+                                currentPager.refreshData();
+
+                            }
                         }
                     });
                 }
             });
 
         } else {
+            pages.clear();
             for (City city : allCity) {
                 pages.add(new PageView(this, city));
             }
             currentPager = pages.get(0);
-            viewPagerAdapter.notifyDataSetChanged();
+            viewPager.setAdapter(new ViewPagerAdapter(pages));
+//            this.viewPagerAdapter.setViews(pages);
+//            viewPagerAdapter.notifyDataSetChanged();
         }
 
     }
@@ -162,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
 
         } else {
             topView.setAlpha((400 - completeShowTopView + progress) / 400f);
-                 }
+        }
 //        440--->0
 //        840--->1
     }
@@ -170,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     @Override
     public void onRefresh(Weather weather, View fromWhere) {
         if (fromWhere == currentPager) {
-            if (weather != null&&weather.getBaseWeather().getTodayBaseWeather()!=null) {
+            if (weather != null && weather.getBaseWeather().getTodayBaseWeather() != null) {
                 Log.e("MainActivity", "onRefresh" + weather.getBaseWeather().getCurrentBaseWeather());
                 topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp());
             } else {
@@ -179,11 +190,27 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
         }
     }
 
-    private void setTopView(Weather weather){
-        if (weather != null&&weather.getBaseWeather().getTodayBaseWeather()!=null) {
+    private void setTopView(Weather weather) {
+        if (weather != null && weather.getBaseWeather().getTodayBaseWeather() != null) {
             topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp());
         } else {
             topView.setText("请刷新数据", "");
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("MainActivity","onActivityResult"+resultCode+"=="+data);
+        switch (resultCode) {
+            case 0:
+                //从城市列表中返回
+                boolean dataChange = data.getBooleanExtra("dataChange", false);
+                if (dataChange) {
+                    initData();
+                }
+                break;
+        }
+
     }
 }

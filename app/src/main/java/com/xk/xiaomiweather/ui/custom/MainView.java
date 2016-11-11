@@ -45,7 +45,7 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
         more.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Activity)getContext()).startActivity(new Intent(getContext(),CityManageActivity.class));
+                ((Activity)getContext()).startActivityForResult(new Intent(getContext(),CityManageActivity.class),0);
             }
         });
     }

@@ -2,11 +2,13 @@ package com.xk.xiaomiweather.ui.custom;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.xk.xiaomiweather.model.bean.City;
+import com.xk.xiaomiweather.ui.CityManageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 
 public class MRecyclerView extends RecyclerView {
-    private List<City> data=new ArrayList<>();
+    private List<City> data = new ArrayList<>();
     private boolean isEdit = false;
     private Adapter adapter;
 
@@ -36,13 +38,19 @@ public class MRecyclerView extends RecyclerView {
         setAdapter(adapter);
     }
 
-public void setData(List<City> data){
-    if (this.data!=null) {
-        this.data.clear();
-        this.data.addAll(data);
+    public void setData(List<City> data) {
+        if (this.data != null) {
+            this.data.clear();
+            this.data.addAll(data);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void deleteItem(City city){
+        int i = data.indexOf(city);
+        data.remove(city);
         adapter.notifyDataSetChanged();
     }
-}
 
     class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
@@ -56,9 +64,28 @@ public void setData(List<City> data){
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(ViewHolder holder, final int position) {
             holder.cityItem.setDeletable(isEdit);
+            holder.cityItem.setOnDeleteClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((CityManageActivity)getContext()).prepareDeleteCity(data.get(position));
+                }
+            });
             holder.cityItem.setText(data.get(position).getDistrict());
+            if (!isEdit) {
+                holder.cityItem.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e("Adapter","onClick整个条目");
+                        ((CityManageActivity)getContext()).addCity(data.get(position));
+                    }
+                });
+            }else{
+                holder.cityItem.setOnClickListener(null);
+            }
+
+
         }
 
         @Override

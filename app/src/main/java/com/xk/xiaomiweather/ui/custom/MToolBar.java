@@ -77,6 +77,7 @@ public class MToolBar extends RelativeLayout {
             public void onClick(View v) {
                 goNormal();
                 ((CityManageActivity)getContext()).goNormal();
+                ((CityManageActivity)getContext()).clearDeleteCache();
             }
         });
 
@@ -85,15 +86,11 @@ public class MToolBar extends RelativeLayout {
             public void onClick(View v) {
                 goNormal();
                 ((CityManageActivity)getContext()).goNormal();
+                ((CityManageActivity)getContext()).excuteDelete();
+
             }
         });
 
-        title.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goSearch();
-            }
-        });
     }
 
     private void init() {

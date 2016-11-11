@@ -81,7 +81,7 @@ public class CityManager {
         ContentResolver contentResolver = mContext.getContentResolver();
 
         //获取到环境云id
-        Cursor query = contentResolver.query(Uri.parse(uri), null, null, null, null);
+        Cursor query = contentResolver.query(Uri.parse(Constant.baseuri + "citylist/" +district), null, null, null, null);
         query.moveToNext();
         String envicloudId = query.getString(query.getColumnIndex("envicloudId"));
         contentResolver.delete(Uri.parse(Constant.baseuri + "citylist/" + district), null, null);
