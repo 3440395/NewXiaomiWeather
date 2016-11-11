@@ -2,6 +2,8 @@ package com.xk.xiaomiweather.ui.custom;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import com.xk.xiaomiweather.ui.IVUpdateable;
 import static com.xk.xiaomiweather.R.id.aqi_des;
 import static com.xk.xiaomiweather.R.id.line;
 import static com.xk.xiaomiweather.R.mipmap.test3;
+import static com.xk.xiaomiweather.R.mipmap.test4;
 
 /**
  * Created by xuekai on 2016/11/9.
@@ -29,6 +32,8 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
     private TextView publish;
     private PolluteDetialView polluteDetialView;
     private DialView dialView;
+    private AQIGraphView aqiGraphView;
+    private AQIGraphView aqiGraphView2;
 
     public AirQualityView(Context context) {
         super(context);
@@ -90,7 +95,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         addView(dialView);
 
         //添加 tab
-        TabStripView tabStripView = new TabStripView(getContext(), "未来5天预报", "过去24小时");
+        TabStripView tabStripView = new TabStripView(getContext(), "未来5天预报", "过去24小时", this);
         LayoutParams tabStripParams = new LayoutParams(880, 80);
         tabStripParams.addRule(CENTER_HORIZONTAL, TRUE);
         tabStripParams.topMargin = 890;
@@ -109,14 +114,23 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         addView(resourceFrom);
 
         //添加曲线图
-        ImageView test4 = new ImageView(getContext());
-        test4.setImageResource(R.mipmap.test4);
-        test4.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        LayoutParams test4Params = new LayoutParams(905, 400);
-        test4Params.addRule(CENTER_HORIZONTAL, TRUE);
-        test4Params.topMargin = 1110;
-        test4.setLayoutParams(test4Params);
-        addView(test4);
+        aqiGraphView = new AQIGraphView(getContext(),false);
+        LayoutParams aqiGraphViewParams = new LayoutParams(905, 400);
+        aqiGraphViewParams.addRule(CENTER_HORIZONTAL, TRUE);
+        aqiGraphViewParams.topMargin = 1110;
+        aqiGraphView.setLayoutParams(aqiGraphViewParams);
+        aqiGraphView.setPadding(0 - 50, 0, 0, 0);
+        addView(aqiGraphView);
+        aqiGraphView.setVisibility(VISIBLE);
+
+        //添加曲线图
+        aqiGraphView2 = new AQIGraphView(getContext(),true);
+        aqiGraphViewParams.addRule(CENTER_HORIZONTAL, TRUE);
+        aqiGraphViewParams.topMargin = 1110;
+        aqiGraphView2.setLayoutParams(aqiGraphViewParams);
+        aqiGraphView2.setPadding(0 - 50, 0, 0, 0);
+        addView(aqiGraphView2);
+        aqiGraphView2.setVisibility(GONE);
 
         //添加返回按钮
         back = new ImageView(getContext());
@@ -133,10 +147,61 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
 
     @Override
     public void update(Weather data) {
-        dialView.updata(data.getAqiWeather().getCurrentAQIWeather().getAQI(),"AQI","空气质量指数",0,400);
+        dialView.updata(data.getAqiWeather().getCurrentAQIWeather().getAQI(), "AQI", "空气质量指数", 0, 400);
         cityName.setText(data.getCity().getDistrict());
         publish.setText("环境云 " + data.getAqiWeather().getCurrentAQIWeather().getTime().substring(8) + ":00发布");
         polluteDetialView.update(data.getAqiWeather().getCurrentAQIWeather());
+
+        aqiGraphView.setData(data.getAqiWeather().getFutureDayAQIs());
+        aqiGraphView2.setData(data.getAqiWeather().getLastHourAQIs());
+        aqiGraphView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        Log.e("AirQualityView", "未来几天" + data.getAqiWeather().getFutureDayAQIs().toString());
+        Log.e("AirQualityView", "过去小时" + data.getAqiWeather().getLastHourAQIs().toString());
+    }
+
+    public void selectGraph(int index) {
+        if (index == 1) {
+            if (aqiGraphView != null) {
+                aqiGraphView.setVisibility(VISIBLE);
+            }
+            if (aqiGraphView2 != null) {
+                aqiGraphView2.setVisibility(GONE);
+            }
+        } else {
+            if (aqiGraphView != null) {
+                aqiGraphView.setVisibility(GONE);
+            }
+            if (aqiGraphView2 != null) {
+                aqiGraphView2.setVisibility(VISIBLE);
+            }
+        }
     }
 }
 //11-09 14:54:27.753 4386-4386/com.xk.xiaomiweather E/AirQualityActivity: onCreateAQIWeather{futureDayAQIs={20161031=34, 20161028=38, 20161029=35, 20161030=34, 20161027=38}, lastHourAQIs={2016110909=82, 2016110908=63, 2016110815=37, 2016110907=59, 2016110814=33, 2016110906=55, 2016110905=55, 2016110904=61, 2016110818=40, 2016110902=64, 2016110911=124, 2016110819=42, 2016110903=63, 2016110912=122, 2016110816=30, 2016110823=71, 2016110900=75, 2016110913=85, 2016110817=37, 2016110901=69, 2016110821=49, 2016110820=46, 2016110910=102}, currentAQIWeather=CurrentAQIWeather{PM25='52', time='2016110913', rdesc='Success', PM10='118', SO2='139.25', o3='23.75', NO2='31.50', primary='颗粒物(PM10)', rcode='null', CO='1.23', AQI='85'}}
+//2016111023=78,
+//2016111020=225,
+//2016111100=72,
+//2016111021=169,
+//2016111102=69,
+//2016111101=66,
+//2016111015=235,
+//2016111104=105,
+//2016111016=204,
+//2016111103=88,
+//2016111017=179,
+//2016111106=136,
+//2016111018=143,
+//2016111105=126,
+//2016111019=181,
+//2016111108=141,
+//2016111107=135,
+//2016111109=157,
+//2016111112=143,
+//2016111113=132,
+//2016111110=157,
+//2016111111=152}

@@ -107,10 +107,10 @@ public class WeatherManager {
         query = contentResolver.query(Uri.parse(Constant.baseuri + "lasthour_aqi/" + city.getEnvicloudId()), null, null, null, null);
         HashMap<String, String> lastHourAQIs = new HashMap<>();
         while (query.moveToNext()) {
-            futureDayAQIs.put(query.getString(query.getColumnIndex("date")), query.getString(query.getColumnIndex("value")));
+            lastHourAQIs.put(query.getString(query.getColumnIndex("date")), query.getString(query.getColumnIndex("value")));
         }
         query.close();
-        aqiWeather.setFutureDayAQIs(lastHourAQIs);
+        aqiWeather.setLastHourAQIs(lastHourAQIs);
         return aqiWeather;
     }
 

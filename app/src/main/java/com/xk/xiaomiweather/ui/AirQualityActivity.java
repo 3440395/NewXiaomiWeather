@@ -22,7 +22,6 @@ public class AirQualityActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Weather  data = (Weather) getIntent().getSerializableExtra("data");
-        Log.e("AirQualityActivity","onCreate"+data.getAqiWeather());
         StatusColorUtil.setStatusBarTextStyle(this,true);
         AirQualityView airQualityView = new AirQualityView(this);
         addContentView(airQualityView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

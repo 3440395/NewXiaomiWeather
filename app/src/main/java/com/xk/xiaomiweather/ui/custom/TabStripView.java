@@ -8,21 +8,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
+import com.xk.xiaomiweather.ui.AirQualityActivity;
+
+import static android.support.v7.widget.AppCompatDrawableManager.get;
 
 /**
  * Created by xuekai on 2016/11/9.
  */
 
 public class TabStripView extends LinearLayout {
-    private String stab1,stab2;
+    private String stab1, stab2;
     private TextView tab1;
     private TextView tab2;
+    private AirQualityView view;
 
 
-    public TabStripView(Context context, String tab1, String tab2) {
+    public TabStripView(Context context, String tab1, String tab2, AirQualityView view) {
         super(context);
-        this.stab1=tab1;
-        this.stab2=tab2;
+        this.view = view;
+        this.stab1 = tab1;
+        this.stab2 = tab2;
         init();
         initListener();
     }
@@ -54,8 +59,8 @@ public class TabStripView extends LinearLayout {
         tab2.setGravity(Gravity.CENTER);
 
         LayoutParams layoutParams = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
-        layoutParams.weight=1;
-        layoutParams.setMargins(1,1,1,1);
+        layoutParams.weight = 1;
+        layoutParams.setMargins(1, 1, 1, 1);
         tab1.setLayoutParams(layoutParams);
         tab2.setLayoutParams(layoutParams);
 
@@ -69,11 +74,13 @@ public class TabStripView extends LinearLayout {
         selectTab(1);
     }
 
-    public void selectTab(int index){
-        if (index==1) {
+    public void selectTab(int index) {
+        if (index == 1) {
+            view.selectGraph(1);
             tab1.setBackgroundColor(0xfff3f3f3);
             tab2.setBackgroundColor(0x00000000);
-        }else{
+        } else {
+            view.selectGraph(2);
             tab2.setBackgroundColor(0xfff3f3f3);
             tab1.setBackgroundColor(0x00000000);
         }

@@ -77,7 +77,6 @@ public class MRecyclerView extends RecyclerView {
                 holder.cityItem.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e("Adapter","onClick整个条目");
                         ((CityManageActivity)getContext()).addCity(data.get(position));
                     }
                 });
