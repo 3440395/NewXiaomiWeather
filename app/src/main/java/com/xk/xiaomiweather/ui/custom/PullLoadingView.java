@@ -81,21 +81,23 @@ public class PullLoadingView extends RelativeLayout {
                         iconRotateAnimation=null;
                     }
                     if (parent.getWeather()==null||parent.getWeather().getCity()==null||parent.getWeather().getCity().getDistrict()==null) {
-                        refreshTime="刚刚刷新";
+                        refreshTime="刚刚更新";
                     }else{
                         refreshTime = SharedPrenfenceUtil.getString(getContext(),parent.getWeather().getCity().getDistrict() );
                     }
                     if (refreshTime!=null&&!refreshTime.equals("")) {
-                        long interval = System.currentTimeMillis() - Long.parseLong(refreshTime);
-                        if(interval<(60*1000)){//小于一分钟
-                            refreshText.setText("刚刚更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
-                        }else if(interval<(60*1000*5)){//小于5分钟
-                            refreshText.setText(interval/60+"分钟前更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
-                        }else{
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
-                            String time = simpleDateFormat.format(Long.parseLong(refreshTime));
-                            refreshText.setText("上次更新："+time);// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                        if (!refreshTime.equals("刚刚更新")||!refreshTime.equals("请更新数据")) {
+                            long interval = System.currentTimeMillis() - Long.parseLong(refreshTime);
+                            if(interval<(60*1000)){//小于一分钟
+                                refreshText.setText("刚刚更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                            }else if(interval<(60*1000*5)){//小于5分钟
+                                refreshText.setText(interval/60+"分钟前更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                            }else{
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
+                                String time = simpleDateFormat.format(Long.parseLong(refreshTime));
+                                refreshText.setText("上次更新："+time);// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
 
+                            }
                         }
                     }else{
                         refreshText.setText("请更新数据");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取

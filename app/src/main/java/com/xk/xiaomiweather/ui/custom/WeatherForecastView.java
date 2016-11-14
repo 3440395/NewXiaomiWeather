@@ -9,14 +9,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
+import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
+import com.xk.xiaomiweather.ui.IVUpdateable;
+
+import java.util.List;
+
+import static android.media.CamcorderProfile.get;
 
 /**
  * Created by xuekai on 2016/11/9.
  */
 
-public class WeatherForecastView extends RelativeLayout {
+public class WeatherForecastView extends RelativeLayout implements IVUpdateable<List<FutureDayBaseWeather>> {
 
     private ImageView back;
+    private DaysTempGraphView daysTempGraphView;
+    private TextView cityName;
+    private TextView publish;
 
     public WeatherForecastView(Context context) {
         super(context);
@@ -36,7 +45,7 @@ public class WeatherForecastView extends RelativeLayout {
     private void init() {
         setBackgroundColor(0xffffffff);
         //添加 名称
-        TextView cityName = new TextView(getContext());
+        cityName = new TextView(getContext());
         cityName.setText("15天趋势预报");
         cityName.setTextSize(17);
         cityName.setId(R.id.aqi_des);//这里我也不清楚为啥 反正随便设置一个id 下面就可以用了
@@ -47,7 +56,7 @@ public class WeatherForecastView extends RelativeLayout {
         cityName.setLayoutParams(cityNameParams);
         addView(cityName);
         //添加 时间
-        TextView publish = new TextView(getContext());
+        publish = new TextView(getContext());
         publish.setText("11月9日-11月20日");
         publish.setTextSize(12);
         publish.setTextColor(0xff8e8e8e);
@@ -59,13 +68,11 @@ public class WeatherForecastView extends RelativeLayout {
         addView(publish);
 
         //添加 图表
-        ImageView test = new ImageView(getContext());
-        test.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        test.setImageResource(R.mipmap.test5);
-        LayoutParams testParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1155);
-        testParams.topMargin = 380;
-        test.setLayoutParams(testParams);
-        addView(test);
+        daysTempGraphView = new DaysTempGraphView(getContext());
+        LayoutParams daysTempGraphParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        daysTempGraphParams.topMargin = 380;
+        daysTempGraphView.setLayoutParams(daysTempGraphParams);
+        addView(daysTempGraphView);
 
 
         //添加返回按钮
@@ -78,7 +85,17 @@ public class WeatherForecastView extends RelativeLayout {
         backParams.bottomMargin=135;
         back.setLayoutParams(backParams);
         addView(back);
+    }
 
+
+
+    @Override
+    public void update(List<FutureDayBaseWeather> data) {
+        cityName.setText(data.size()+"天趋势预报");
+        String start=data.get(0).getDate().substring(4,6)+"月"+data.get(0).getDate().substring(6,8)+"日";
+        String end=data.get(data.size()-1).getDate().substring(4,6)+"月"+data.get(data.size()-1).getDate().substring(6,8)+"日";
+        publish.setText(start+"-"+end);
+        daysTempGraphView.setData(data);
     }
 }
 //[FutureDayBaseWeather{temperature='2℃~10℃', weather='霾', weather_id=[53, 53], wind='微风', week='星期三', date='20161109'},
