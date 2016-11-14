@@ -81,7 +81,7 @@ public class PullLoadingView extends RelativeLayout {
                         iconRotateAnimation=null;
                     }
                     if (parent.getWeather()==null||parent.getWeather().getCity()==null||parent.getWeather().getCity().getDistrict()==null) {
-                        refreshTime="刚刚更新";
+                        refreshTime="";
                     }else{
                         refreshTime = SharedPrenfenceUtil.getString(getContext(),parent.getWeather().getCity().getDistrict() );
                     }

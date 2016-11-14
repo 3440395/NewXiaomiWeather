@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
 
 import java.text.ParseException;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static android.media.CamcorderProfile.get;
+import static com.xk.xiaomiweather.R.id.weather;
 
 /**
  * Created by xk on 2016/11/9 22:14.
@@ -71,14 +73,10 @@ public class AQIGraphView extends RecyclerView {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             if (isHours) {
-                holder.aqiItem.setTime(keyList.get(position));
+                holder.aqiItem.setTime(keyList.get(position).substring(8)+":00");
                 if (position == 0) {
                     holder.aqiItem.setDrawLeftLine(false);
-
-                } else if (position == 1) {
-                    holder.aqiItem.setDrawLeftLine(true);
-                    holder.aqiItem.setLastTemp(Integer.parseInt(data.get(keyList.get(position - 1))));
-                } else {
+                }  else {
                     holder.aqiItem.setDrawLeftLine(true);
                     holder.aqiItem.setLastTemp(Integer.parseInt(data.get(keyList.get(position - 1))));
                 }
