@@ -28,7 +28,7 @@ public class MToolBar extends RelativeLayout {
     private ImageView back;
     private SearchView searchView;
     private TextView title;
-    private boolean isNormal=true;
+    private boolean isNormal = true;
 
     public MToolBar(Context context) {
         super(context);
@@ -37,17 +37,7 @@ public class MToolBar extends RelativeLayout {
     }
 
     private void initListener() {
-        cancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        }); confirm.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        }); edit.setOnClickListener(new OnClickListener() {
+        edit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -57,8 +47,8 @@ public class MToolBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (isNormal) {
-                    ((Activity)getContext()).finish();
-                }else{
+                    ((Activity) getContext()).finish();
+                } else {
                     goNormal();
                 }
             }
@@ -68,7 +58,7 @@ public class MToolBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 goEdit();
-                ((CityManageActivity)getContext()).goEdit();
+                ((CityManageActivity) getContext()).goEdit();
 
             }
         });
@@ -76,8 +66,8 @@ public class MToolBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 goNormal();
-                ((CityManageActivity)getContext()).goNormal();
-                ((CityManageActivity)getContext()).clearDeleteCache();
+                ((CityManageActivity) getContext()).goNormal();
+                ((CityManageActivity) getContext()).clearDeleteCache();
             }
         });
 
@@ -85,8 +75,8 @@ public class MToolBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 goNormal();
-                ((CityManageActivity)getContext()).goNormal();
-                ((CityManageActivity)getContext()).excuteDelete();
+                ((CityManageActivity) getContext()).goNormal();
+                ((CityManageActivity) getContext()).excuteDelete();
 
             }
         });
@@ -102,16 +92,16 @@ public class MToolBar extends RelativeLayout {
 
         LayoutParams buttonParams1 = new LayoutParams(140, 85);
         buttonParams1.addRule(CENTER_VERTICAL, TRUE);
-        buttonParams1.addRule(ALIGN_PARENT_LEFT,TRUE);
-        buttonParams1.leftMargin=30;
+        buttonParams1.addRule(ALIGN_PARENT_LEFT, TRUE);
+        buttonParams1.leftMargin = 30;
         cancel = new MButton(getContext(), "取消", R.drawable.bg_button_write, 0xff000000);
         cancel.setLayoutParams(buttonParams1);
         contain.addView(cancel);
 
         LayoutParams buttonParams2 = new LayoutParams(140, 85);
         buttonParams2.addRule(CENTER_VERTICAL, TRUE);
-        buttonParams2.addRule(ALIGN_PARENT_RIGHT,TRUE);
-        buttonParams2.rightMargin=30;
+        buttonParams2.addRule(ALIGN_PARENT_RIGHT, TRUE);
+        buttonParams2.rightMargin = 30;
 
         confirm = new MButton(getContext(), "确定", R.drawable.bg_button_blue, 0xffffffff);
         confirm.setLayoutParams(buttonParams2);
@@ -124,26 +114,26 @@ public class MToolBar extends RelativeLayout {
         title = new TextView(getContext());
         title.setText("城市管理");
         LayoutParams titleParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        titleParams.addRule(CENTER_IN_PARENT,TRUE);
+        titleParams.addRule(CENTER_IN_PARENT, TRUE);
         title.setLayoutParams(titleParams);
         contain.addView(title);
 
 
         searchView = new SearchView(getContext());
-        RelativeLayout.LayoutParams searchViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,85 );
-        searchViewParams.addRule(CENTER_VERTICAL,TRUE);
-        searchViewParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
-        searchViewParams.addRule(ALIGN_PARENT_LEFT,TRUE);
-        searchViewParams.leftMargin=120;
-        searchViewParams.rightMargin=40;
+        RelativeLayout.LayoutParams searchViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 85);
+        searchViewParams.addRule(CENTER_VERTICAL, TRUE);
+        searchViewParams.addRule(ALIGN_PARENT_RIGHT, TRUE);
+        searchViewParams.addRule(ALIGN_PARENT_LEFT, TRUE);
+        searchViewParams.leftMargin = 120;
+        searchViewParams.rightMargin = 40;
         searchView.setLayoutParams(searchViewParams);
         contain.addView(searchView);
 
 
         LayoutParams buttonParams3 = new LayoutParams(85, 85);
         buttonParams3.addRule(CENTER_VERTICAL, TRUE);
-        buttonParams3.addRule(ALIGN_PARENT_LEFT,TRUE);
-        buttonParams3.leftMargin=15;
+        buttonParams3.addRule(ALIGN_PARENT_LEFT, TRUE);
+        buttonParams3.leftMargin = 15;
         back = new ImageView(getContext());
         back.setScaleType(ImageView.ScaleType.CENTER_CROP);
         back.setImageResource(R.mipmap.icon_back1);
@@ -157,8 +147,8 @@ public class MToolBar extends RelativeLayout {
     }
 
 
-    public void goSearch(){
-        isNormal=false;
+    public void goSearch() {
+        isNormal = false;
         cancel.setVisibility(GONE);
         edit.setVisibility(GONE);
         confirm.setVisibility(GONE);
@@ -167,9 +157,9 @@ public class MToolBar extends RelativeLayout {
         searchView.setVisibility(VISIBLE);
     }
 
-    public void goEdit(){
-        ((CityManageActivity)getContext()).showAdd(false);
-        isNormal=false;
+    public void goEdit() {
+        ((CityManageActivity) getContext()).showAdd(false);
+        isNormal = false;
         cancel.setVisibility(VISIBLE);
         edit.setVisibility(GONE);
         confirm.setVisibility(VISIBLE);
@@ -178,9 +168,9 @@ public class MToolBar extends RelativeLayout {
         searchView.setVisibility(GONE);
     }
 
-    public void goNormal(){
-        ((CityManageActivity)getContext()).showAdd(true);
-        isNormal=true;
+    public void goNormal() {
+        ((CityManageActivity) getContext()).showAdd(true);
+        isNormal = true;
         cancel.setVisibility(GONE);
         edit.setVisibility(VISIBLE);
         confirm.setVisibility(GONE);

@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     public void onRefresh(Weather weather, View fromWhere) {
         if (fromWhere == currentPager) {
             if (weather != null && weather.getBaseWeather().getTodayBaseWeather() != null) {
-                Log.e("MainActivity", "onRefresh" + weather.getBaseWeather().getCurrentBaseWeather());
                 topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp());
             } else {
                 topView.setText("请刷新数据", "");

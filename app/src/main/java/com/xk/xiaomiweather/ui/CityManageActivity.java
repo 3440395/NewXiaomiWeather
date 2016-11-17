@@ -194,6 +194,7 @@ public class CityManageActivity extends AppCompatActivity {
     }
 
     public void addCity(final City city) {
+        Log.e("CityManageActivity","addCity");
         if (searchItemCanClick) {
             ExecutorUtil.getInstance().runOnSingleThread(new Runnable() {
                 @Override
@@ -203,6 +204,8 @@ public class CityManageActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             dataChanged = true;
+                            intent.putExtra("dataChange", dataChanged);
+                            setResult(0, intent);
                             finish();
                         }
                     });
