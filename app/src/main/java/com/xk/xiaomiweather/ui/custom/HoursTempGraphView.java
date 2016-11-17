@@ -11,6 +11,7 @@ import com.xk.xiaomiweather.model.bean.BaseWeather;
 import com.xk.xiaomiweather.model.bean.City;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
 import com.xk.xiaomiweather.model.bean.TodayBaseWeather;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +52,7 @@ public class HoursTempGraphView extends RecyclerView {
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             HourWeatherItem hourWeatherItem = new HourWeatherItem(getContext());
 
-            LayoutParams layoutParams = new LayoutParams(200, ViewGroup.LayoutParams.MATCH_PARENT);
+            LayoutParams layoutParams = new LayoutParams(ScreenManager.getInstance().adpW(200), ViewGroup.LayoutParams.MATCH_PARENT);
             hourWeatherItem.setLayoutParams(layoutParams);
             return new ViewHolder(hourWeatherItem);
         }

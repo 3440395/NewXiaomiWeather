@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import static java.lang.Integer.parseInt;
 
@@ -111,7 +112,7 @@ public class DialView extends View {
     }
 
     private void drawDes(Canvas canvas) {
-        mPaint.setTextSize(40);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(40));
         mPaint.setColor(Color.parseColor("#ff8E8D8D"));
         mPaint.setStrokeWidth(1);
         mPaint.setStyle(Paint.Style.FILL);
@@ -122,7 +123,7 @@ public class DialView extends View {
     }
 
     private void drawIntro(Canvas canvas) {
-        mPaint.setTextSize(45);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(45));
         mPaint.setColor(Color.parseColor("#ff9D9D9D"));
         mPaint.setStrokeWidth(1);
         mPaint.setStyle(Paint.Style.FILL);
@@ -133,7 +134,7 @@ public class DialView extends View {
     }
 
     private void drawValues(Canvas canvas) {
-        mPaint.setTextSize(95);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(95));
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextAlign(Paint.Align.CENTER);

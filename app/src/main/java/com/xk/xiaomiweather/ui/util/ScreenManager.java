@@ -51,6 +51,27 @@ public class ScreenManager {
         getScreen();
     }
 
+    /**
+     * 适配宽
+     * @param w
+     * @return
+     */
+    public int adpW(int w){
+       return (int) (w*1f/1080*getScreenWidth());
+    }
+    /**
+     * 适配高
+     * @param h
+     * @return
+     */
+    public int adpH(int h){
+       return (int) (h*1f/1920*getScreenHeigth());
+    }
+
+    public float getDensity() {
+        return density;
+    }
+
     private void getScreen() {
         Resources resources = mContext.getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();

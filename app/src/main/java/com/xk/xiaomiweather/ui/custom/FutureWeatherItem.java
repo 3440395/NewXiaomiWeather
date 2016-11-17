@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,17 +53,17 @@ public class FutureWeatherItem extends LinearLayout {
         LinearLayout timeContain = new LinearLayout(getContext());
 
         timeContain.setOrientation(VERTICAL);
-        LayoutParams timeContainParams = new LayoutParams(240, 165);
+        LayoutParams timeContainParams = new LayoutParams(ScreenManager.getInstance().adpW(240), ScreenManager.getInstance().adpH(165));
         LayoutParams tvLayoutparams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         tvLayoutparams.gravity = Gravity.CENTER;
         week = new TextView(getContext());
         week.setText("今天");
         week.setLayoutParams(tvLayoutparams);
         week.setTextColor(0xff4BB1E6);
-        week.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40);
+        week.setTextSize(TypedValue.COMPLEX_UNIT_PX, ScreenManager.getInstance().adpH(40));
         date = new TextView(getContext());
         date.setText("11月14日");
-        date.setTextSize(TypedValue.COMPLEX_UNIT_PX, 30);
+        date.setTextSize(TypedValue.COMPLEX_UNIT_PX, ScreenManager.getInstance().adpH(30));
         date.setLayoutParams(tvLayoutparams);
         timeContain.setGravity(Gravity.CENTER);
         timeContain.setLayoutParams(timeContainParams);
@@ -73,7 +74,7 @@ public class FutureWeatherItem extends LinearLayout {
         //添加具体的天气
         detailContain = new LinearLayout(getContext());
         detailContain.setOrientation(VERTICAL);
-        LayoutParams detailContainParams = new LayoutParams(240, 1000);
+        LayoutParams detailContainParams = new LayoutParams(ScreenManager.getInstance().adpW(240), ScreenManager.getInstance().adpH(1000));
         detailContain.setBackground(getResources().getDrawable(R.drawable.item_forecast_graph));
         detailContain.setEnabled(true);
         detailContain.setLayoutParams(detailContainParams);
@@ -82,9 +83,9 @@ public class FutureWeatherItem extends LinearLayout {
         //多云、晴 图标1
         LinearLayout weatherSituation1 = new LinearLayout(getContext());
         weatherSituation1.setOrientation(VERTICAL);
-        LayoutParams weatherSituationParams1 = new LayoutParams(240, 150);
-        weatherSituationParams1.topMargin=50;
-        weatherSituationParams1.bottomMargin=10;
+        LayoutParams weatherSituationParams1 = new LayoutParams(ScreenManager.getInstance().adpW(240), ScreenManager.getInstance().adpH(150));
+        weatherSituationParams1.topMargin=ScreenManager.getInstance().adpH(50);
+        weatherSituationParams1.bottomMargin=ScreenManager.getInstance().adpH(10);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.gravity = Gravity.CENTER;
         ImageView icon1 = new ImageView(getContext());
@@ -113,8 +114,8 @@ public class FutureWeatherItem extends LinearLayout {
         //多云、晴 图标2
         LinearLayout weatherSituation2 = new LinearLayout(getContext());
         weatherSituation2.setOrientation(VERTICAL);
-        LayoutParams weatherSituationParams2 = new LayoutParams(240, 150);
-        weatherSituationParams2.topMargin=25;
+        LayoutParams weatherSituationParams2 = new LayoutParams(ScreenManager.getInstance().adpW(240), ScreenManager.getInstance().adpH(150));
+        weatherSituationParams2.topMargin=ScreenManager.getInstance().adpH(25);
         ImageView icon2 = new ImageView(getContext());
         icon2.setImageResource(R.mipmap.icon_sun);
         icon2.setLayoutParams(layoutParams);
@@ -130,9 +131,9 @@ public class FutureWeatherItem extends LinearLayout {
         //风
         LinearLayout windContain = new LinearLayout(getContext());
         windContain.setOrientation(VERTICAL);
-        LayoutParams windParams = new LayoutParams(240, 150);
-        windParams.topMargin=40;
-        windParams.bottomMargin=25;
+        LayoutParams windParams = new LayoutParams(ScreenManager.getInstance().adpW(240), ScreenManager.getInstance().adpH(150));
+        windParams.topMargin=ScreenManager.getInstance().adpH(40);
+        windParams.bottomMargin=ScreenManager.getInstance().adpH(25);
         windPower = new TextView(getContext());
         windPower.setText("微风");
         windPower.setLayoutParams(layoutParams);

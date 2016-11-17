@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.support.annotation.UiThread;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -58,9 +59,9 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
     //手指抬起那一瞬间的scrollY
     private int upScrollY;
     //最大的下拉高度
-    private int maxPullHeight = 440;
+    private int maxPullHeight = ScreenManager.getInstance().adpH(440);
     //刷新的下拉高度
-    private int refreshPullHeight = 195;
+    private int refreshPullHeight =  ScreenManager.getInstance().adpH(195);;
     //下拉刷新收回所用的时间
     private int pushTime = 200;
     //第一次绘制完成（用来使他滚动到maxPullHeight）
@@ -246,7 +247,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
 
         mainView = new MainView(context);
-        LinearLayout.LayoutParams mainViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1090);
+        LinearLayout.LayoutParams mainViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ScreenManager.getInstance().adpH(1090));
         mainView.setLayoutParams(mainViewLayoutParams);
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -258,7 +259,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(mainView);
 
         //添加天气item
-        ViewGroup.LayoutParams weatherItemViewLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 229);
+        ViewGroup.LayoutParams weatherItemViewLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ScreenManager.getInstance().adpH(229));
         weatherItemView = new WeatherItemView(context, 0);
         weatherItemView.setLayoutParams(weatherItemViewLayoutParams);
         weatherItemView1 = new WeatherItemView(context, 1);
@@ -271,14 +272,14 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(weatherItemView2);
         //添加几天趋势预报
         detailItem1 = new DetailItem(context, "7天趋势预报");
-        ViewGroup.LayoutParams detailItemLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+        ViewGroup.LayoutParams detailItemLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ScreenManager.getInstance().adpH(150));
         detailItem1.setLayoutParams(detailItemLayoutParams);
         linearLayout.addView(detailItem1);
 
         //添加24小时预报title
         TitleItem titleItem1 = new TitleItem(context, "24小时预报");
-        LinearLayout.LayoutParams titleItemLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
-        titleItemLayoutParams.topMargin = 30;
+        LinearLayout.LayoutParams titleItemLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ScreenManager.getInstance().adpH(150));
+        titleItemLayoutParams.topMargin =  ScreenManager.getInstance().adpH(30);
         titleItem1.setLayoutParams(titleItemLayoutParams);
         linearLayout.addView(titleItem1);
 
@@ -290,7 +291,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
         //添加24小时预报图表
         hoursTempGraphView = new HoursTempGraphView(context);
-        LinearLayout.LayoutParams hoursTempGraphViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 546);
+        LinearLayout.LayoutParams hoursTempGraphViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,  ScreenManager.getInstance().adpH(546));
         hoursTempGraphView.setLayoutParams(hoursTempGraphViewParams);
         linearLayout.addView(hoursTempGraphView);
 
@@ -309,17 +310,17 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         //添加空气质量图表的paraent
         airQualitys = new LinearLayout(context);
         airQualitys.setBackgroundColor(0xffffffff);
-        LinearLayout.LayoutParams airQualitysLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 440);
+        LinearLayout.LayoutParams airQualitysLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ScreenManager.getInstance().adpH(546));
         airQualitys.setOrientation(LinearLayout.HORIZONTAL);
         airQualitys.setGravity(Gravity.CENTER_HORIZONTAL);
         airQualitys.setLayoutParams(airQualitysLayoutParams);
 
         //添加空气质量图表1
         airQuality1 = new DialView(context);
-        LinearLayout.LayoutParams airQualityLayoutParams = new LinearLayout.LayoutParams(310, 320);
+        LinearLayout.LayoutParams airQualityLayoutParams = new LinearLayout.LayoutParams( ScreenManager.getInstance().adpW(310),  ScreenManager.getInstance().adpH(340));
         airQualityLayoutParams.gravity=Gravity.CENTER_VERTICAL;
-        airQualityLayoutParams.leftMargin=75;
-        airQualityLayoutParams.rightMargin=75;
+        airQualityLayoutParams.leftMargin= ScreenManager.getInstance().adpW(75);
+        airQualityLayoutParams.rightMargin=ScreenManager.getInstance().adpW(75);
         airQuality1.setLayoutParams(airQualityLayoutParams);
         airQualitys.addView(airQuality1);
         //添加空气质量图表2
@@ -343,17 +344,17 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
         //添加打伞建议
         travelItemView = new AdviceItemView(context, R.mipmap.icon_san);
-        LinearLayout.LayoutParams travelLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        LinearLayout.LayoutParams travelLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(255));
         travelItemView.setLayoutParams(travelLayoutParams);
         linearLayout.addView(travelItemView);
         //添加穿衣建议
         dressItemView = new AdviceItemView(context, R.mipmap.icon_dress);
-        LinearLayout.LayoutParams dressLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        LinearLayout.LayoutParams dressLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(255));
         dressItemView.setLayoutParams(dressLayoutParams);
         linearLayout.addView(dressItemView);
         //添加打紫外线建议
         uvItemView = new AdviceItemView(context, R.mipmap.icon_uv);
-        LinearLayout.LayoutParams uvLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        LinearLayout.LayoutParams uvLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(255));
         uvItemView.setLayoutParams(uvLayoutParams);
         linearLayout.addView(uvItemView);
         //添加运动建议 title
@@ -362,7 +363,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(titleItem4);
         //添加运动建议
         exerciseItemView = new AdviceItemView(context, R.mipmap.icon_exercise);
-        LinearLayout.LayoutParams exerciseLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        LinearLayout.LayoutParams exerciseLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(255));
         exerciseItemView.setLayoutParams(exerciseLayoutParams);
         linearLayout.addView(exerciseItemView); //添加出行建议 title
         //添加汽车建议 title
@@ -371,15 +372,15 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         linearLayout.addView(titleItem5);
         //添加洗车建议
         washItemView = new AdviceItemView(context, R.mipmap.icon_wash);
-        LinearLayout.LayoutParams washLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 255);
+        LinearLayout.LayoutParams washLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(255));
         washItemView.setLayoutParams(washLayoutParams);
         linearLayout.addView(washItemView); //添加出行建议 title
 
 
         TextView adTextView = new TextView(context);
-        adTextView.setTextSize(12);
+        adTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,ScreenManager.getInstance().adpH(12));
         adTextView.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams adTextViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150);
+        LinearLayout.LayoutParams adTextViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(150));
         adTextView.setLayoutParams(adTextViewLayoutParams);
         adTextView.setText("环境云     聚合天气");
         linearLayout.addView(adTextView);

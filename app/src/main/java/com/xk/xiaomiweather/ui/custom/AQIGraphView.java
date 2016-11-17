@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,7 +66,7 @@ public class AQIGraphView extends RecyclerView {
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             AQIItem aqiItem = new AQIItem(getContext());
 
-            LayoutParams layoutParams = new LayoutParams(200, ViewGroup.LayoutParams.MATCH_PARENT);
+            LayoutParams layoutParams = new LayoutParams(ScreenManager.getInstance().adpW(200), ViewGroup.LayoutParams.MATCH_PARENT);
             aqiItem.setLayoutParams(layoutParams);
             return new ViewHolder(aqiItem);
         }

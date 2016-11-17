@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+import com.xk.xiaomiweather.ui.util.ScreenManager;
+
 import static android.R.attr.bottom;
 import static android.R.attr.max;
 import static android.R.attr.top;
@@ -160,7 +162,7 @@ public class DoubleTempGraphView extends View {
     }
 
     private void drawTemp(Canvas canvas) {
-        paint.setTextSize(35);
+        paint.setTextSize(ScreenManager.getInstance().adpH(35));
         paint.setColor(Color.parseColor("#ff333333"));
         paint.setStrokeWidth(0);
         paint.setStyle(Paint.Style.FILL);

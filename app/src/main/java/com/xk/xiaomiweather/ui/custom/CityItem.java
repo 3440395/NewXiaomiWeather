@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.City;
 import com.xk.xiaomiweather.ui.CityManageActivity;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import static android.R.attr.data;
 
@@ -33,8 +34,8 @@ public class CityItem extends RelativeLayout {
         View line = new View(getContext());
         line.setBackgroundColor(0xffe7e7e7);
         LayoutParams lineLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
-        lineLayoutParams.leftMargin = 70;
-        lineLayoutParams.rightMargin = 70;
+        lineLayoutParams.leftMargin = ScreenManager.getInstance().adpW(70);
+        lineLayoutParams.rightMargin =  ScreenManager.getInstance().adpW(70);
         lineLayoutParams.addRule(ALIGN_PARENT_BOTTOM, TRUE);
         line.setLayoutParams(lineLayoutParams);
         addView(line);
@@ -43,16 +44,16 @@ public class CityItem extends RelativeLayout {
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(CENTER_VERTICAL, TRUE);
-        layoutParams.leftMargin = 70;
+        layoutParams.leftMargin =  ScreenManager.getInstance().adpW(70);
         linearLayout.setLayoutParams(layoutParams);
 
 
         imageView = new ImageView(getContext());
         imageView.setImageResource(R.mipmap.icon_delete);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        LinearLayout.LayoutParams ivLayoutParams = new LinearLayout.LayoutParams(58, 58);
+        LinearLayout.LayoutParams ivLayoutParams = new LinearLayout.LayoutParams( ScreenManager.getInstance().adpW(58),  ScreenManager.getInstance().adpH(58));
         ivLayoutParams.gravity = Gravity.CENTER_VERTICAL;
-        ivLayoutParams.rightMargin = 20;
+        ivLayoutParams.rightMargin =  ScreenManager.getInstance().adpW(20);
         imageView.setLayoutParams(ivLayoutParams);
         linearLayout.addView(imageView);
 
@@ -61,7 +62,7 @@ public class CityItem extends RelativeLayout {
 
         textView.setTextSize(14);
         LinearLayout.LayoutParams tvLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tvLayoutParams.leftMargin = 10;
+        tvLayoutParams.leftMargin =  ScreenManager.getInstance().adpW(10);
         tvLayoutParams.gravity = Gravity.CENTER_VERTICAL;
         textView.setLayoutParams(tvLayoutParams);
         linearLayout.addView(textView);

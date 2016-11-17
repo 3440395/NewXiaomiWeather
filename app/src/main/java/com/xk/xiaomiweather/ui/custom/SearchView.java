@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.ui.CityManageActivity;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 /**
  * Created by xuekai on 2016/11/9.
@@ -32,9 +33,9 @@ public class SearchView extends LinearLayout {
     private void init() {
         setBackground(getResources().getDrawable(R.drawable.bg_search));
         ImageView icon = new ImageView(getContext());
-        LayoutParams iconParams = new LayoutParams(48, 48);
+        LayoutParams iconParams = new LayoutParams(ScreenManager.getInstance().adpW(48), ScreenManager.getInstance().adpH(48));
         iconParams.gravity = Gravity.CENTER_VERTICAL;
-        iconParams.leftMargin = 10;
+        iconParams.leftMargin = ScreenManager.getInstance().adpW(10);
         icon.setLayoutParams(iconParams);
         icon.setImageResource(R.mipmap.icon_search);
         addView(icon);
@@ -64,8 +65,8 @@ public class SearchView extends LinearLayout {
         FrameLayout.LayoutParams textLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         textView.setLayoutParams(textLayoutParams);
         textView.setGravity(Gravity.CENTER);
-        textLayoutParams.leftMargin=20;
-        textLayoutParams.rightMargin=20;
+        textLayoutParams.leftMargin=ScreenManager.getInstance().adpW(20);
+        textLayoutParams.rightMargin=ScreenManager.getInstance().adpW(20);
         textView.setText("搜索");
         frameLayout.addView(textView);
         addView(frameLayout);

@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+import com.xk.xiaomiweather.ui.util.ScreenManager;
+
 /**
  * Created by xuekai on 2016/11/10.
  */
@@ -20,8 +22,8 @@ public class AQIItem extends View {
     private Paint mPaint;
     private int viewHeight;
     private int viewWidth;
-    private int pointTopY = 240;//最高点的Y坐标 130
-    private int pointBottomY = 260;//最低点的Y坐标 255
+    private int pointTopY =  ScreenManager.getInstance().adpH(240);//最高点的Y坐标 130
+    private int pointBottomY =  ScreenManager.getInstance().adpH(260);//最低点的Y坐标 255
     private int pointX;//所有点的x坐标
     private int pointY;//当前点的Y
 
@@ -31,7 +33,6 @@ public class AQIItem extends View {
 
     public AQIItem(Context context) {
         super(context);
-        setBackgroundColor(0xffffffff);
         init();
     }
 
@@ -75,7 +76,7 @@ public class AQIItem extends View {
 
 
     private void drawAQI(Canvas canvas) {
-        mPaint.setTextSize(35);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(35));
         mPaint.setColor(Color.parseColor("#ff333333"));
         mPaint.setStrokeWidth(0);
         mPaint.setStyle(Paint.Style.FILL);
@@ -123,11 +124,11 @@ public class AQIItem extends View {
 
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(pointX, pointY, 15, mPaint);
+        canvas.drawCircle(pointX, pointY,  ScreenManager.getInstance().adpW(15), mPaint);
         mPaint.setColor(0xff24C3F1);
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.STROKE);
-        canvas.drawCircle(pointX, pointY, 10, mPaint);
+        canvas.drawCircle(pointX, pointY, ScreenManager.getInstance().adpW(10), mPaint);
     }
 
     private void drawLine(Canvas canvas) {
@@ -136,8 +137,8 @@ public class AQIItem extends View {
 
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.FILL);
-            canvas.drawLine(0, 300, viewWidth / 2, 300, mPaint);
-            canvas.drawLine(viewWidth / 2, 300, viewWidth, 300, mPaint);
+            canvas.drawLine(0, ScreenManager.getInstance().adpH(300), viewWidth / 2, ScreenManager.getInstance().adpH(300), mPaint);
+            canvas.drawLine(viewWidth / 2, ScreenManager.getInstance().adpH(300), viewWidth, ScreenManager.getInstance().adpH(300), mPaint);
     }
 
     public void setDrawLeftLine(boolean drawLeftLine) {
@@ -154,7 +155,7 @@ public class AQIItem extends View {
      * @param canvas
      */
     private void drawTime(Canvas canvas) {
-        mPaint.setTextSize(40);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(40));
         mPaint.setColor(Color.parseColor("#ff333333"));
         mPaint.setStrokeWidth(0);
         mPaint.setStyle(Paint.Style.FILL);

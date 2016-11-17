@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.City;
@@ -44,12 +45,14 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusColorUtil.setStatusBarTextStyle(this, true);
+//        StatusColorUtil.setStatusBarTextStyle(this, true);
         initView();
         initData();
         initListener();
+        Toast.makeText(this,ScreenManager.getInstance().getScreenWidth()+"="+ScreenManager.getInstance().getScreenHeigth()+"="+ScreenManager.getInstance().getDensity(),Toast.LENGTH_LONG).show();
     }
 
     private void initListener() {
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
 
 
         topView = new TopView(this);
-        FrameLayout.LayoutParams topViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 165);
+        FrameLayout.LayoutParams topViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(200));
         topView.setLayoutParams(topViewLayoutParams);
 
         root.addView(topView);
@@ -162,17 +165,17 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     /**
      * 当完全显示topview时候的scrolly值
      */
-    private int completeShowTopView = 840;
+    private int completeShowTopView = ScreenManager.getInstance().adpH(840);
 
     @Override
     public void onScrollChange(int progress) {
-        if (progress <= 440) {
+        if (progress <= ScreenManager.getInstance().adpH(440)) {
             topView.setAlpha(0);
         } else if (progress > completeShowTopView) {
             topView.setAlpha(1);
 
         } else {
-            topView.setAlpha((400 - completeShowTopView + progress) / 400f);
+            topView.setAlpha((ScreenManager.getInstance().adpH(400) - completeShowTopView + progress) / 1f/ScreenManager.getInstance().adpH(400));
         }
 //        440--->0
 //        840--->1

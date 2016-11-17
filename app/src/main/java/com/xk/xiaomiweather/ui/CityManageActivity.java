@@ -18,6 +18,7 @@ import com.xk.xiaomiweather.ui.custom.CityItem;
 import com.xk.xiaomiweather.ui.custom.MRecyclerView;
 import com.xk.xiaomiweather.ui.custom.MToolBar;
 import com.xk.xiaomiweather.ui.util.ExecutorUtil;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 import com.xk.xiaomiweather.ui.util.StatusColorUtil;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class CityManageActivity extends AppCompatActivity {
     private void initView() {
         LinearLayout root = (LinearLayout) findViewById(R.id.root);
         mToolBar = new MToolBar(this);
-        LinearLayout.LayoutParams mToolBarParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+        LinearLayout.LayoutParams mToolBarParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(200));
         mToolBar.setLayoutParams(mToolBarParams);
         root.addView(mToolBar);
 
@@ -81,7 +82,7 @@ public class CityManageActivity extends AppCompatActivity {
         root.addView(mRecyclerView);
 
         addCityView = new AddCityView(this);
-        LinearLayout.LayoutParams addCityViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+        LinearLayout.LayoutParams addCityViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(205));
         addCityView.setLayoutParams(addCityViewParams);
         root.addView(addCityView);
     }
