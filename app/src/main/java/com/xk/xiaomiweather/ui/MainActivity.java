@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
 
 
     private void initView() {
-View
         root = (FrameLayout) findViewById(R.id.root);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter(pages);

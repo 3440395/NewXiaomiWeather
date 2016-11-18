@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
+import com.xk.xiaomiweather.ui.util.IconUtil;
 import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public class FutureWeatherItem extends LinearLayout {
     private TextView windPower;
     private TextView windLevel;
     private DoubleTempGraphView doubleTempGraphView;
-    private ImageView icon2;
     private ImageView icon1;
+    private ImageView icon2;
 
     public FutureWeatherItem(Context context) {
         super(context);
@@ -90,6 +91,8 @@ public class FutureWeatherItem extends LinearLayout {
         weatherSituationParams1.bottomMargin=ScreenManager.getInstance().adpH(10);
         LayoutParams layoutParams = new LayoutParams(ScreenManager.getInstance().adpW(80), ScreenManager.getInstance().adpW(80));
         layoutParams.gravity = Gravity.CENTER;
+        LinearLayout.LayoutParams situationParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        situationParams.gravity=Gravity.CENTER_HORIZONTAL;
         icon1 = new ImageView(getContext());
         icon1.setImageResource(R.mipmap.icon_sun);
         icon1.setLayoutParams(layoutParams);
@@ -118,7 +121,7 @@ public class FutureWeatherItem extends LinearLayout {
         weatherSituation2.setOrientation(VERTICAL);
         LayoutParams weatherSituationParams2 = new LayoutParams(ScreenManager.getInstance().adpW(240), ScreenManager.getInstance().adpH(150));
         weatherSituationParams2.topMargin=ScreenManager.getInstance().adpH(25);
-        ImageView icon2 = new ImageView(getContext());
+        icon2 = new ImageView(getContext());
         icon2.setImageResource(R.mipmap.icon_sun);
         icon2.setLayoutParams(layoutParams);
         situation2 = new TextView(getContext());
