@@ -13,6 +13,7 @@ import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
 import com.xk.xiaomiweather.ui.WeatherForecastActivity;
+import com.xk.xiaomiweather.ui.util.IconUtil;
 
 import org.w3c.dom.Text;
 
@@ -81,7 +82,7 @@ public class WeatherItemView extends RelativeLayout implements IVUpdateable<Weat
          temperature = temperature.replace("~", "/");
         temp.setText(temperature);
 
-
+        IconUtil.setIcon(icon,data.getBaseWeather().getFutureDayBaseWeathers().get(index).getWeather_id()[0]);
 
     }
 }

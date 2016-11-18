@@ -16,6 +16,8 @@ import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
 import com.xk.xiaomiweather.model.manager.WeatherManager;
 import com.xk.xiaomiweather.ui.callback.OnPullStateChangeListener;
+import com.xk.xiaomiweather.ui.util.IconUtil;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 import com.xk.xiaomiweather.ui.util.SharedPrenfenceUtil;
 
 import java.text.SimpleDateFormat;
@@ -91,7 +93,7 @@ public class PullLoadingView extends RelativeLayout {
                             if(interval<(60*1000)){//小于一分钟
                                 refreshText.setText("刚刚更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
                             }else if(interval<(60*1000*5)){//小于5分钟
-                                refreshText.setText(interval/60+"分钟前更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
+                                refreshText.setText(interval/60/1000+"分钟前更新");// TODO: by xk 2016/11/6 21:01 以后这个值要从sp中根据城市名称获取
                             }else{
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
                                 String time = simpleDateFormat.format(Long.parseLong(refreshTime));
@@ -133,11 +135,11 @@ public class PullLoadingView extends RelativeLayout {
 
 
         icon = new ImageView(getContext());
-        icon.setImageResource(R.mipmap.icon_sun);
-        iconLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        IconUtil.setIcon(icon,"00");
+        iconLayoutParams = new LayoutParams(80, 80);
         iconLayoutParams.addRule(CENTER_HORIZONTAL,TRUE);
         iconLayoutParams.addRule(ALIGN_PARENT_TOP,TRUE);
-
+        icon.setLayoutParams(iconLayoutParams);
         refreshText=new TextView(getContext());
         refreshText.setText("刚刚更新");
         refreshText.setTextSize(12);

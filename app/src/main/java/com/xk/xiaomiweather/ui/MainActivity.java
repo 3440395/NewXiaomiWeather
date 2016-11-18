@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
 
 
     private void initView() {
-
+View
         root = (FrameLayout) findViewById(R.id.root);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter(pages);
@@ -182,18 +183,18 @@ public class MainActivity extends AppCompatActivity implements OnPageViewScrollC
     public void onRefresh(Weather weather, View fromWhere) {
         if (fromWhere == currentPager) {
             if (weather != null && weather.getBaseWeather().getTodayBaseWeather() != null) {
-                topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp());
+                topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp(),weather.getBaseWeather().getTodayBaseWeather().getWeather_id()[0]);
             } else {
-                topView.setText("请刷新数据", "");
+                topView.setText("请刷新数据", "","");
             }
         }
     }
 
     private void setTopView(Weather weather) {
         if (weather != null && weather.getBaseWeather().getTodayBaseWeather() != null) {
-            topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp());
+            topView.setText(weather.getCity().getDistrict(), weather.getBaseWeather().getCurrentBaseWeather().getTemp(),weather.getBaseWeather().getTodayBaseWeather().getWeather_id()[0]);
         } else {
-            topView.setText("请刷新数据", "");
+            topView.setText("请刷新数据", "","");
         }
     }
 

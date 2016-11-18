@@ -14,12 +14,14 @@ import android.widget.TextView;
 
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
+import com.xk.xiaomiweather.ui.util.IconUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static android.R.attr.data;
+import static android.R.id.icon1;
 import static com.xk.xiaomiweather.R.id.weather;
 
 /**
@@ -38,6 +40,8 @@ public class FutureWeatherItem extends LinearLayout {
     private TextView windPower;
     private TextView windLevel;
     private DoubleTempGraphView doubleTempGraphView;
+    private ImageView icon2;
+    private ImageView icon1;
 
     public FutureWeatherItem(Context context) {
         super(context);
@@ -83,16 +87,18 @@ public class FutureWeatherItem extends LinearLayout {
         LinearLayout weatherSituation1 = new LinearLayout(getContext());
         weatherSituation1.setOrientation(VERTICAL);
         LayoutParams weatherSituationParams1 = new LayoutParams(240, 150);
-        weatherSituationParams1.topMargin=50;
-        weatherSituationParams1.bottomMargin=10;
-        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        weatherSituationParams1.topMargin = 50;
+        weatherSituationParams1.bottomMargin = 10;
+        LayoutParams layoutParams = new LayoutParams(80, 80);
+        LinearLayout.LayoutParams situationParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        situationParams.gravity=Gravity.CENTER_HORIZONTAL;
         layoutParams.gravity = Gravity.CENTER;
-        ImageView icon1 = new ImageView(getContext());
+        icon1 = new ImageView(getContext());
         icon1.setImageResource(R.mipmap.icon_sun);
         icon1.setLayoutParams(layoutParams);
         situation1 = new TextView(getContext());
         situation1.setText("晴");
-        situation1.setLayoutParams(layoutParams);
+        situation1.setLayoutParams(situationParams);
         weatherSituation1.setGravity(Gravity.CENTER);
         weatherSituation1.setLayoutParams(weatherSituationParams1);
         weatherSituation1.addView(icon1);
@@ -100,27 +106,26 @@ public class FutureWeatherItem extends LinearLayout {
         detailContain.addView(weatherSituation1);
 
 
-
         //温度曲线
         doubleTempGraphView = new DoubleTempGraphView(getContext());
         LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-        layoutParams1.weight=1;
+        layoutParams1.weight = 1;
         doubleTempGraphView.setLayoutParams(layoutParams1);
         detailContain.addView(doubleTempGraphView);
-
 
 
         //多云、晴 图标2
         LinearLayout weatherSituation2 = new LinearLayout(getContext());
         weatherSituation2.setOrientation(VERTICAL);
         LayoutParams weatherSituationParams2 = new LayoutParams(240, 150);
-        weatherSituationParams2.topMargin=25;
-        ImageView icon2 = new ImageView(getContext());
+        weatherSituationParams2.topMargin = 25;
+        icon2 = new ImageView(getContext());
         icon2.setImageResource(R.mipmap.icon_sun);
         icon2.setLayoutParams(layoutParams);
+
         situation2 = new TextView(getContext());
         situation2.setText("阴");
-        situation2.setLayoutParams(layoutParams);
+        situation2.setLayoutParams(situationParams);
         weatherSituation2.setGravity(Gravity.CENTER);
         weatherSituation2.setLayoutParams(weatherSituationParams2);
         weatherSituation2.addView(icon2);
@@ -131,11 +136,11 @@ public class FutureWeatherItem extends LinearLayout {
         LinearLayout windContain = new LinearLayout(getContext());
         windContain.setOrientation(VERTICAL);
         LayoutParams windParams = new LayoutParams(240, 150);
-        windParams.topMargin=40;
-        windParams.bottomMargin=25;
+        windParams.topMargin = 40;
+        windParams.bottomMargin = 25;
         windPower = new TextView(getContext());
         windPower.setText("微风");
-        windPower.setLayoutParams(layoutParams);
+        windPower.setLayoutParams(situationParams);
 //        windLevel = new TextView(getContext());
 //        windLevel.setText("<2级");
 //        windLevel.setLayoutParams(layoutParams);
@@ -151,14 +156,13 @@ public class FutureWeatherItem extends LinearLayout {
     }
 
     public void updata(List<FutureDayBaseWeather> futureDayBaseWeathers, int postion) {
-        System.out.println(futureDayBaseWeathers.toString());
-        String sDate=futureDayBaseWeathers.get(postion).getDate().substring(4,6)+"月"+futureDayBaseWeathers.get(postion).getDate().substring(6,8)+"日";
+        String sDate = futureDayBaseWeathers.get(postion).getDate().substring(4, 6) + "月" + futureDayBaseWeathers.get(postion).getDate().substring(6, 8) + "日";
         date.setText(sDate);
-        if (postion==0) {
+        if (postion == 0) {
             week.setText("今天");
             week.setTextColor(0xff4BB1E6);
             detailContain.setEnabled(true);
-        }else{
+        } else {
             week.setTextColor(0xff000000);
             detailContain.setEnabled(false);
             week.setText(futureDayBaseWeathers.get(postion).getWeek());
@@ -166,17 +170,20 @@ public class FutureWeatherItem extends LinearLayout {
 
         String[] weaters = futureDayBaseWeathers.get(postion).getWeather().split("转");
         situation1.setText(weaters[0]);
-        if (weaters.length==2) {
+        if (weaters.length == 2) {
             situation2.setText(weaters[1]);
-        }else{
+        } else {
             situation2.setText(weaters[0]);
         }
 
-        windPower.setText(futureDayBaseWeathers.get(postion).getWind().substring(0,2));
+        IconUtil.setIcon(icon1,futureDayBaseWeathers.get(postion).getWeather_id()[0]);
+        IconUtil.setIcon(icon2,futureDayBaseWeathers.get(postion).getWeather_id()[1]);
+
+        windPower.setText(futureDayBaseWeathers.get(postion).getWind().substring(0, 2));
 
 //        doubleTempGraphView.setData();
-        List<Integer> temp1=new ArrayList<>();
-        List<Integer> temp2=new ArrayList<>();
+        List<Integer> temp1 = new ArrayList<>();
+        List<Integer> temp2 = new ArrayList<>();
         for (FutureDayBaseWeather futureDayBaseWeather : futureDayBaseWeathers) {
 //            -2℃~13℃
             String replace = futureDayBaseWeather.getTemperature().replace("℃", "");
@@ -184,30 +191,32 @@ public class FutureWeatherItem extends LinearLayout {
             temp1.add(Integer.parseInt(split[0]));
             temp2.add(Integer.parseInt(split[1]));
         }
+
+
         Collections.sort(temp1);
         Collections.sort(temp2);
-        if (postion==0) {
+        if (postion == 0) {
             doubleTempGraphView.setDrawLeft(false);
             doubleTempGraphView.setDrawRight(true);
-            doubleTempGraphView.setData1(temp1.get(temp1.size()-1),temp1.get(0),Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[0]),
-                    0,Integer.parseInt(futureDayBaseWeathers.get(postion+1).getTemperature().replace("℃", "").split("~")[0]));
+            doubleTempGraphView.setData1(temp1.get(temp1.size() - 1), temp1.get(0), Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[0]),
+                    0, Integer.parseInt(futureDayBaseWeathers.get(postion + 1).getTemperature().replace("℃", "").split("~")[0]));
             doubleTempGraphView.setData2(temp2.get(temp2.size() - 1), temp2.get(0), Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[1]),
                     0, Integer.parseInt(futureDayBaseWeathers.get(postion + 1).getTemperature().replace("℃", "").split("~")[1]));
-        }else if(postion==futureDayBaseWeathers.size()-1){
+        } else if (postion == futureDayBaseWeathers.size() - 1) {
             doubleTempGraphView.setDrawLeft(true);
             doubleTempGraphView.setDrawRight(false);
-            doubleTempGraphView.setData1(temp1.get(temp1.size()-1),temp1.get(0),Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[0]),
-                    Integer.parseInt(futureDayBaseWeathers.get(postion-1).getTemperature().replace("℃", "").split("~")[0]),
+            doubleTempGraphView.setData1(temp1.get(temp1.size() - 1), temp1.get(0), Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[0]),
+                    Integer.parseInt(futureDayBaseWeathers.get(postion - 1).getTemperature().replace("℃", "").split("~")[0]),
                     0);
             doubleTempGraphView.setData2(temp2.get(temp2.size() - 1), temp2.get(0), Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[1]),
                     Integer.parseInt(futureDayBaseWeathers.get(postion - 1).getTemperature().replace("℃", "").split("~")[1]),
                     0);
-        }else{
+        } else {
             doubleTempGraphView.setDrawLeft(true);
             doubleTempGraphView.setDrawRight(true);
-            doubleTempGraphView.setData1(temp1.get(temp1.size()-1),temp1.get(0),Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[0]),
-                    Integer.parseInt(futureDayBaseWeathers.get(postion-1).getTemperature().replace("℃", "").split("~")[0]),
-                    Integer.parseInt(futureDayBaseWeathers.get(postion+1).getTemperature().replace("℃", "").split("~")[0]));
+            doubleTempGraphView.setData1(temp1.get(temp1.size() - 1), temp1.get(0), Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[0]),
+                    Integer.parseInt(futureDayBaseWeathers.get(postion - 1).getTemperature().replace("℃", "").split("~")[0]),
+                    Integer.parseInt(futureDayBaseWeathers.get(postion + 1).getTemperature().replace("℃", "").split("~")[0]));
             doubleTempGraphView.setData2(temp2.get(temp2.size() - 1), temp2.get(0), Integer.parseInt(futureDayBaseWeathers.get(postion).getTemperature().replace("℃", "").split("~")[1]),
                     Integer.parseInt(futureDayBaseWeathers.get(postion - 1).getTemperature().replace("℃", "").split("~")[1]),
                     Integer.parseInt(futureDayBaseWeathers.get(postion + 1).getTemperature().replace("℃", "").split("~")[1]));

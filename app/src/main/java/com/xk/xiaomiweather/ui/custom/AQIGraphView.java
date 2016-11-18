@@ -49,6 +49,7 @@ public class AQIGraphView extends RecyclerView {
 
     public void setData(Map<String, String> data) {
         if (this.data != null) {
+
             Set<String> strings = data.keySet();
             keyList.clear();
             keyList.addAll(strings);

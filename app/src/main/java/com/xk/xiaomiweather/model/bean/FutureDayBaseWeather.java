@@ -19,7 +19,7 @@ public class FutureDayBaseWeather  implements Serializable {
 //        "date": "20140321"
     private String temperature;
     private String weather;
-    private String[] weather_id;//json中是 weather_id{fa:00,fb:01}
+    private String[] weather_id;//json中是 weather_id{fa:d00,fb:01}
     private String wind;
     private String week;
     private String date;
