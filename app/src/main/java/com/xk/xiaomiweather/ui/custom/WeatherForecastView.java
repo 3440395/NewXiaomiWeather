@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class WeatherForecastView extends RelativeLayout implements IVUpdateable<
         cityName.setTextColor(0xff000000);
         LayoutParams cityNameParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         cityNameParams.addRule(CENTER_HORIZONTAL, TRUE);
-        cityNameParams.topMargin = 165;
+        cityNameParams.topMargin = ScreenManager.getInstance().adpH(165);
         cityName.setLayoutParams(cityNameParams);
         addView(cityName);
         //添加 时间
@@ -63,14 +64,14 @@ public class WeatherForecastView extends RelativeLayout implements IVUpdateable<
         LayoutParams publishParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         publishParams.addRule(CENTER_HORIZONTAL, TRUE);
         publishParams.addRule(BELOW, R.id.aqi_des);//照应上面的cityName.setId(R.id.aqi_des);
-        publishParams.topMargin = 25;
+        publishParams.topMargin = ScreenManager.getInstance().adpH(25);
         publish.setLayoutParams(publishParams);
         addView(publish);
 
         //添加 图表
         daysTempGraphView = new DaysTempGraphView(getContext());
         LayoutParams daysTempGraphParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        daysTempGraphParams.topMargin = 380;
+        daysTempGraphParams.topMargin = ScreenManager.getInstance().adpH(380);
         daysTempGraphView.setLayoutParams(daysTempGraphParams);
         addView(daysTempGraphView);
 
@@ -79,10 +80,10 @@ public class WeatherForecastView extends RelativeLayout implements IVUpdateable<
         back = new ImageView(getContext());
         back.setImageResource(R.mipmap.icon_back);
         back.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        LayoutParams backParams = new LayoutParams(145, 145);
+        LayoutParams backParams = new LayoutParams(ScreenManager.getInstance().adpW(145), ScreenManager.getInstance().adpH(145));
         backParams.addRule(CENTER_HORIZONTAL,TRUE);
         backParams.addRule(ALIGN_PARENT_BOTTOM,TRUE);
-        backParams.bottomMargin=135;
+        backParams.bottomMargin=ScreenManager.getInstance().adpH(135);
         back.setLayoutParams(backParams);
         addView(back);
     }

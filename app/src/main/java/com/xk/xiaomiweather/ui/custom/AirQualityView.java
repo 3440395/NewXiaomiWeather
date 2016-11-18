@@ -15,7 +15,9 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.AQIWeather;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
+import static android.R.attr.data;
 import static com.xk.xiaomiweather.R.id.aqi_des;
 import static com.xk.xiaomiweather.R.id.line;
 import static com.xk.xiaomiweather.R.mipmap.test3;
@@ -60,7 +62,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         cityName.setTextColor(0xff000000);
         RelativeLayout.LayoutParams cityNameParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         cityNameParams.addRule(CENTER_HORIZONTAL, TRUE);
-        cityNameParams.topMargin = 165;
+        cityNameParams.topMargin = ScreenManager.getInstance().adpH(165);
         cityName.setLayoutParams(cityNameParams);
         addView(cityName);
         //添加 发布时间
@@ -71,7 +73,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         RelativeLayout.LayoutParams publishParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         publishParams.addRule(CENTER_HORIZONTAL, TRUE);
         publishParams.addRule(BELOW, aqi_des);//照应上面的cityName.setId(R.id.aqi_des);
-        publishParams.topMargin = 25;
+        publishParams.topMargin = ScreenManager.getInstance().adpH(25);
         publish.setLayoutParams(publishParams);
         addView(publish);
 //    "PM25":"39",,"time":"2016110909","PM10":"74","SO2":"49.25","o3":"1.25","NO2":"35.00","primary":"颗粒物(PM10)","rcode":200,"CO":"1.28","AQI":"63"}
@@ -79,26 +81,26 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
 
         //添加污染详情
         polluteDetialView = new PolluteDetialView(getContext());
-        RelativeLayout.LayoutParams polluteDetialParams = new RelativeLayout.LayoutParams(450, 330);
-        polluteDetialParams.topMargin = 435;
-        polluteDetialParams.leftMargin = 100;
+        RelativeLayout.LayoutParams polluteDetialParams = new RelativeLayout.LayoutParams(ScreenManager.getInstance().adpW(450), ViewGroup.LayoutParams.WRAP_CONTENT);
+        polluteDetialParams.topMargin = ScreenManager.getInstance().adpH(435);
+        polluteDetialParams.leftMargin = ScreenManager.getInstance().adpW(100);
         polluteDetialView.setLayoutParams(polluteDetialParams);
         addView(polluteDetialView);
 
         //添加aqi 图表
         dialView = new DialView(getContext());
-        LayoutParams dialViewParams = new LayoutParams(350, 350);
+        LayoutParams dialViewParams = new LayoutParams(ScreenManager.getInstance().adpW(350), ViewGroup.LayoutParams.WRAP_CONTENT);
         dialViewParams.addRule(ALIGN_PARENT_RIGHT, TRUE);
-        dialViewParams.topMargin = 430;
-        dialViewParams.rightMargin = 100;
+        dialViewParams.topMargin = ScreenManager.getInstance().adpH(430);
+        dialViewParams.rightMargin = ScreenManager.getInstance().adpW(100);
         dialView.setLayoutParams(dialViewParams);
         addView(dialView);
 
         //添加 tab
         TabStripView tabStripView = new TabStripView(getContext(), "未来5天预报", "过去24小时", this);
-        LayoutParams tabStripParams = new LayoutParams(880, 80);
+        LayoutParams tabStripParams = new LayoutParams(ScreenManager.getInstance().adpW(880), ScreenManager.getInstance().adpH(80));
         tabStripParams.addRule(CENTER_HORIZONTAL, TRUE);
-        tabStripParams.topMargin = 890;
+        tabStripParams.topMargin = ScreenManager.getInstance().adpH(890);
         tabStripView.setLayoutParams(tabStripParams);
         addView(tabStripView);
 
@@ -108,38 +110,38 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
         resourceFrom.setTextSize(10);
         resourceFrom.setTextColor(0xff8e8e8e);
         LayoutParams resourceFromParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        resourceFromParams.topMargin = 1020;
-        resourceFromParams.leftMargin = 100;
+        resourceFromParams.topMargin = ScreenManager.getInstance().adpH(1020);
+        resourceFromParams.leftMargin = ScreenManager.getInstance().adpW(100);
         resourceFrom.setLayoutParams(resourceFromParams);
         addView(resourceFrom);
 
         //添加曲线图
         aqiGraphView = new AQIGraphView(getContext(),false);
-        LayoutParams aqiGraphViewParams = new LayoutParams(905, 400);
+        LayoutParams aqiGraphViewParams = new LayoutParams(ScreenManager.getInstance().adpW(905), ScreenManager.getInstance().adpH(400));
         aqiGraphViewParams.addRule(CENTER_HORIZONTAL, TRUE);
-        aqiGraphViewParams.topMargin = 1110;
+        aqiGraphViewParams.topMargin = ScreenManager.getInstance().adpH(1110);
         aqiGraphView.setLayoutParams(aqiGraphViewParams);
-        aqiGraphView.setPadding(0 - 50, 0, 0, 0);
+        aqiGraphView.setPadding(ScreenManager.getInstance().adpW(-50), 0, 0, 0);
         addView(aqiGraphView);
         aqiGraphView.setVisibility(VISIBLE);
 
         //添加曲线图
         aqiGraphView2 = new AQIGraphView(getContext(),true);
         aqiGraphViewParams.addRule(CENTER_HORIZONTAL, TRUE);
-        aqiGraphViewParams.topMargin = 1110;
+        aqiGraphViewParams.topMargin = ScreenManager.getInstance().adpH(1110);
         aqiGraphView2.setLayoutParams(aqiGraphViewParams);
-        aqiGraphView2.setPadding(0 - 50, 0, 0, 0);
+        aqiGraphView2.setPadding(ScreenManager.getInstance().adpW(-50), 0, 0, 0);
         addView(aqiGraphView2);
         aqiGraphView2.setVisibility(GONE);
 
         //添加返回按钮
         back = new ImageView(getContext());
         back.setImageResource(R.mipmap.icon_back);
-        back.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        LayoutParams backParams = new LayoutParams(145, 145);
+        back.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        LayoutParams backParams = new LayoutParams(ScreenManager.getInstance().adpW(145), ScreenManager.getInstance().adpH(145));
         backParams.addRule(CENTER_HORIZONTAL, TRUE);
         backParams.addRule(ALIGN_PARENT_BOTTOM, TRUE);
-        backParams.bottomMargin = 135;
+        backParams.bottomMargin = ScreenManager.getInstance().adpW(135);
         back.setLayoutParams(backParams);
         addView(back);
 
@@ -154,6 +156,12 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
 
         aqiGraphView.setData(data.getAqiWeather().getFutureDayAQIs());
         aqiGraphView2.setData(data.getAqiWeather().getLastHourAQIs());
+        aqiGraphView2.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
         aqiGraphView.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

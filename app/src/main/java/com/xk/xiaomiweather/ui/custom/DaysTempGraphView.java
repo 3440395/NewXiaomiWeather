@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.xk.xiaomiweather.model.bean.FutureDayBaseWeather;
 import com.xk.xiaomiweather.model.bean.ThreeHourBaseWeather;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class DaysTempGraphView extends RecyclerView {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             FutureWeatherItem futureWeatherItem = new FutureWeatherItem(getContext());
-            LayoutParams layoutParams = new LayoutParams(240, ViewGroup.LayoutParams.MATCH_PARENT);
+            LayoutParams layoutParams = new LayoutParams(ScreenManager.getInstance().adpW(240), ViewGroup.LayoutParams.MATCH_PARENT);
             futureWeatherItem.setLayoutParams(layoutParams);
             return new ViewHolder(futureWeatherItem);
         }

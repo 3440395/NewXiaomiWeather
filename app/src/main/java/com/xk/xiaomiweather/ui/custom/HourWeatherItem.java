@@ -9,6 +9,8 @@ import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.view.View;
 
+import com.xk.xiaomiweather.ui.util.ScreenManager;
+
 /**
  * Created by xuekai on 2016/11/10.
  */
@@ -23,8 +25,8 @@ public class HourWeatherItem extends View {
     private Paint mPaint;
     private int viewHeight;
     private int viewWidth;
-    private int pointTopY = 10;//最高点的Y坐标 130
-    private int pointBottomY = 255;//最低点的Y坐标 255
+    private int pointTopY = ScreenManager.getInstance().adpH(10);//最高点的Y坐标 130
+    private int pointBottomY = ScreenManager.getInstance().adpH(255);//最低点的Y坐标 255
     private int pointX;//所有点的x坐标
     private int pointY;//当前点的Y
 
@@ -88,8 +90,8 @@ public class HourWeatherItem extends View {
             mPaint.setStrokeWidth(2);
 
             Path path = new Path();
-            path.moveTo(viewWidth / 2, 425);
-            path.lineTo(viewWidth / 2, pointY+15);
+            path.moveTo(viewWidth / 2, ScreenManager.getInstance().adpH(425));
+            path.lineTo(viewWidth / 2, ScreenManager.getInstance().adpH(15)+pointY);
             PathEffect effects = new DashPathEffect(new float[]{10,10,10,10},5);
             mPaint.setPathEffect(effects);
             canvas.drawPath(path, mPaint);
@@ -103,7 +105,7 @@ public class HourWeatherItem extends View {
     }
 
     private void drawTemp(Canvas canvas) {
-        mPaint.setTextSize(35);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(35));
         mPaint.setColor(Color.parseColor("#ff333333"));
         mPaint.setStrokeWidth(0);
         mPaint.setStyle(Paint.Style.FILL);
@@ -151,11 +153,11 @@ public class HourWeatherItem extends View {
 
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(pointX, pointY, 15, mPaint);
+        canvas.drawCircle(pointX, pointY, ScreenManager.getInstance().adpW(15), mPaint);
         mPaint.setColor(0xff24C3F1);
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.STROKE);
-        canvas.drawCircle(pointX, pointY, 10, mPaint);
+        canvas.drawCircle(pointX, pointY, ScreenManager.getInstance().adpW(10), mPaint);
     }
 
     private void drawLine(Canvas canvas) {
@@ -165,10 +167,10 @@ public class HourWeatherItem extends View {
         mPaint.setStrokeWidth(2);
         mPaint.setStyle(Paint.Style.FILL);
         if (drawLeftLine) {
-            canvas.drawLine(0, 425, viewWidth / 2, 425, mPaint);
+            canvas.drawLine(0, ScreenManager.getInstance().adpH(425), viewWidth / 2, ScreenManager.getInstance().adpH(425), mPaint);
         }
         if (drawRightLine) {
-            canvas.drawLine(viewWidth / 2, 425, viewWidth, 425, mPaint);
+            canvas.drawLine(viewWidth / 2, ScreenManager.getInstance().adpH(425), viewWidth, ScreenManager.getInstance().adpH(425), mPaint);
         }
     }
 
@@ -186,7 +188,7 @@ public class HourWeatherItem extends View {
      * @param canvas
      */
     private void drawTime(Canvas canvas) {
-        mPaint.setTextSize(40);
+        mPaint.setTextSize(ScreenManager.getInstance().adpH(40));
         mPaint.setColor(Color.parseColor("#ff333333"));
         mPaint.setStrokeWidth(0);
         mPaint.setStyle(Paint.Style.FILL);

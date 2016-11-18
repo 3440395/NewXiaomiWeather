@@ -86,22 +86,22 @@ public class MToolBar extends RelativeLayout {
     private void init() {
         setBackgroundColor(0xfff2f2f2);
         RelativeLayout contain = new RelativeLayout(getContext());
-        LayoutParams containParams = new LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 140);
+        LayoutParams containParams = new LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(140));
         containParams.topMargin = ScreenManager.getInstance().getStatusBarHeight();
         contain.setLayoutParams(containParams);
 
-        LayoutParams buttonParams1 = new LayoutParams(140, 85);
+        LayoutParams buttonParams1 = new LayoutParams(ScreenManager.getInstance().adpW(140), ScreenManager.getInstance().adpH(85));
         buttonParams1.addRule(CENTER_VERTICAL, TRUE);
         buttonParams1.addRule(ALIGN_PARENT_LEFT, TRUE);
-        buttonParams1.leftMargin = 30;
+        buttonParams1.leftMargin = ScreenManager.getInstance().adpW(30);
         cancel = new MButton(getContext(), "取消", R.drawable.bg_button_write, 0xff000000);
         cancel.setLayoutParams(buttonParams1);
         contain.addView(cancel);
 
-        LayoutParams buttonParams2 = new LayoutParams(140, 85);
+        LayoutParams buttonParams2 = new LayoutParams(ScreenManager.getInstance().adpW(140), ScreenManager.getInstance().adpH(85));
         buttonParams2.addRule(CENTER_VERTICAL, TRUE);
         buttonParams2.addRule(ALIGN_PARENT_RIGHT, TRUE);
-        buttonParams2.rightMargin = 30;
+        buttonParams2.rightMargin = ScreenManager.getInstance().adpW(30);
 
         confirm = new MButton(getContext(), "确定", R.drawable.bg_button_blue, 0xffffffff);
         confirm.setLayoutParams(buttonParams2);
@@ -120,20 +120,20 @@ public class MToolBar extends RelativeLayout {
 
 
         searchView = new SearchView(getContext());
-        RelativeLayout.LayoutParams searchViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 85);
+        RelativeLayout.LayoutParams searchViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, ScreenManager.getInstance().adpH(85));
         searchViewParams.addRule(CENTER_VERTICAL, TRUE);
         searchViewParams.addRule(ALIGN_PARENT_RIGHT, TRUE);
         searchViewParams.addRule(ALIGN_PARENT_LEFT, TRUE);
-        searchViewParams.leftMargin = 120;
-        searchViewParams.rightMargin = 40;
+        searchViewParams.leftMargin = ScreenManager.getInstance().adpW(120);;
+        searchViewParams.rightMargin = ScreenManager.getInstance().adpW(40);
         searchView.setLayoutParams(searchViewParams);
         contain.addView(searchView);
 
 
-        LayoutParams buttonParams3 = new LayoutParams(85, 85);
+        LayoutParams buttonParams3 = new LayoutParams(ScreenManager.getInstance().adpW(85), ScreenManager.getInstance().adpH(85));
         buttonParams3.addRule(CENTER_VERTICAL, TRUE);
         buttonParams3.addRule(ALIGN_PARENT_LEFT, TRUE);
-        buttonParams3.leftMargin = 15;
+        buttonParams3.leftMargin = ScreenManager.getInstance().adpW(15);
         back = new ImageView(getContext());
         back.setScaleType(ImageView.ScaleType.CENTER_CROP);
         back.setImageResource(R.mipmap.icon_back1);

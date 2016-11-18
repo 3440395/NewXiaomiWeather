@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.ui.CityManageActivity;
 import com.xk.xiaomiweather.ui.IVUpdateable;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import org.w3c.dom.Text;
 
@@ -56,9 +58,9 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
         more = new ImageView(getContext());
         more.setImageResource(R.mipmap.icon_more);
         LayoutParams moreLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        moreLayoutParams.topMargin = 115;
-        moreLayoutParams.height = 50;
-        moreLayoutParams.rightMargin = 35;
+        moreLayoutParams.topMargin =  ScreenManager.getInstance().adpH(115);;
+        moreLayoutParams.height =  ScreenManager.getInstance().adpH(50);;
+        moreLayoutParams.rightMargin =  ScreenManager.getInstance().adpW(35);;
         moreLayoutParams.addRule(ALIGN_PARENT_RIGHT, TRUE);
         more.setLayoutParams(moreLayoutParams);
         addView(more);
@@ -66,25 +68,25 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
         tempTextView = new TextView(getContext());
         tempTextView.setText("--");
         tempTextView.setTextColor(0xffffffff);
-        tempTextView.setTextSize(70);
+        tempTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,ScreenManager.getInstance().adpH(165));
         LayoutParams tempTextViewLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tempTextViewLayoutParams.topMargin = 80;
-        tempTextViewLayoutParams.leftMargin = 70;
+        tempTextViewLayoutParams.topMargin =  ScreenManager.getInstance().adpH(80);;
+        tempTextViewLayoutParams.leftMargin =  ScreenManager.getInstance().adpW(70);;
         tempTextView.setLayoutParams(tempTextViewLayoutParams);
         addView(tempTextView);
 
         cityAndState = new TextView(getContext());
         cityAndState.setText("");
         cityAndState.setTextColor(0xaaffffff);
-        cityAndState.setTextSize(14);
+        cityAndState.setTextSize( TypedValue.COMPLEX_UNIT_PX,ScreenManager.getInstance().adpH(45));
         LayoutParams cityAndStateLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cityAndStateLayoutParams.leftMargin = 80;
-        cityAndStateLayoutParams.topMargin = 320;
+        cityAndStateLayoutParams.leftMargin =  ScreenManager.getInstance().adpW(80);
+        cityAndStateLayoutParams.topMargin =  ScreenManager.getInstance().adpH(320);
         cityAndState.setLayoutParams(cityAndStateLayoutParams);
         addView(cityAndState);
 
 
-        LayoutParams bottomContainLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 235);
+        LayoutParams bottomContainLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ScreenManager.getInstance().adpH(235));
         bottomContainLayoutParams.addRule(ALIGN_PARENT_BOTTOM, TRUE);
 
         View bottomContain = View.inflate(getContext(), R.layout.layout_main_bottom, null);
