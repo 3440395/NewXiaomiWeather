@@ -135,7 +135,7 @@ public class MToolBar extends RelativeLayout {
         buttonParams3.addRule(ALIGN_PARENT_LEFT, TRUE);
         buttonParams3.leftMargin = ScreenManager.getInstance().adpW(15);
         back = new ImageView(getContext());
-        back.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        back.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         back.setImageResource(R.mipmap.icon_back1);
         back.setLayoutParams(buttonParams3);
         contain.addView(back);

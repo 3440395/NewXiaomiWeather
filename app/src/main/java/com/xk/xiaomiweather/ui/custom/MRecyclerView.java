@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.xk.xiaomiweather.model.bean.City;
 import com.xk.xiaomiweather.ui.CityManageActivity;
+import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class MRecyclerView extends RecyclerView {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             CityItem cityItem = new CityItem(getContext());
-            RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 135);
+            RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(135));
             cityItem.setLayoutParams(layoutParams);
             return new ViewHolder(cityItem);
         }

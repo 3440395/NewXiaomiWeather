@@ -7,14 +7,14 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_marginLeft="75px"
+        android:layout_marginLeft="20dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:src="@mipmap/icon_sun" />
 
     <LinearLayout
-        android:layout_marginLeft="225px"
+        android:layout_marginLeft="80dp"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:id="@+id/bottomLine"
         android:background="#e7e7e7"
         android:layout_alignParentBottom="true"
-        android:layout_width="855px"
+        android:layout_width="285dp"
         android:layout_alignParentRight="true"
         android:layout_height="1px"/>
 </RelativeLayout>

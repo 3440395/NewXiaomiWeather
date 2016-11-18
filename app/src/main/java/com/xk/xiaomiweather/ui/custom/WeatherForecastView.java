@@ -79,7 +79,7 @@ public class WeatherForecastView extends RelativeLayout implements IVUpdateable<
         //添加返回按钮
         back = new ImageView(getContext());
         back.setImageResource(R.mipmap.icon_back);
-        back.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        back.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         LayoutParams backParams = new LayoutParams(ScreenManager.getInstance().adpW(145), ScreenManager.getInstance().adpH(145));
         backParams.addRule(CENTER_HORIZONTAL,TRUE);
         backParams.addRule(ALIGN_PARENT_BOTTOM,TRUE);

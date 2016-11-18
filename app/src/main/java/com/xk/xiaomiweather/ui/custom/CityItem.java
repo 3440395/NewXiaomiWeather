@@ -50,7 +50,7 @@ public class CityItem extends RelativeLayout {
 
         imageView = new ImageView(getContext());
         imageView.setImageResource(R.mipmap.icon_delete);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         LinearLayout.LayoutParams ivLayoutParams = new LinearLayout.LayoutParams( ScreenManager.getInstance().adpW(58),  ScreenManager.getInstance().adpH(58));
         ivLayoutParams.gravity = Gravity.CENTER_VERTICAL;
         ivLayoutParams.rightMargin =  ScreenManager.getInstance().adpW(20);

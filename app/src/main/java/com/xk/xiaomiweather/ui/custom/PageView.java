@@ -378,7 +378,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
 
         TextView adTextView = new TextView(context);
-        adTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,ScreenManager.getInstance().adpH(12));
+        adTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,ScreenManager.getInstance().adpH(36));
         adTextView.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams adTextViewLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenManager.getInstance().adpH(150));
         adTextView.setLayoutParams(adTextViewLayoutParams);
