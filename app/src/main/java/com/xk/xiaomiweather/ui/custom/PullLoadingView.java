@@ -136,7 +136,7 @@ public class PullLoadingView extends RelativeLayout {
 
         icon = new ImageView(getContext());
         IconUtil.setIcon(icon,"00");
-        iconLayoutParams = new LayoutParams(80, 80);
+        iconLayoutParams = new LayoutParams(ScreenManager.getInstance().adpW(80), ScreenManager.getInstance().adpH(80));
         iconLayoutParams.addRule(CENTER_HORIZONTAL,TRUE);
         iconLayoutParams.addRule(ALIGN_PARENT_TOP,TRUE);
         icon.setLayoutParams(iconLayoutParams);
