@@ -447,7 +447,7 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
         if (data != null && data.getAqiWeather().getCurrentAQIWeather() != null) {
             CurrentAQIWeather currentAQIWeather = data.getAqiWeather().getCurrentAQIWeather();
             titleItem2.update(currentAQIWeather);
-            airQuality1.updata(currentAQIWeather.getAQI(),"AQI","空气质量指数",0,400);
+            airQuality1.updata(currentAQIWeather.getPM25(),"PM2.5","PM2.5",0,400);
 
 
             float max=0;

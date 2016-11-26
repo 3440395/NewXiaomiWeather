@@ -9,6 +9,8 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
 
+import static com.xk.xiaomiweather.R.id.aqi;
+
 /**
  * Created by xuekai on 2016/11/9.
  */
@@ -25,16 +27,16 @@ public class PolluteDetialView extends FrameLayout implements IVUpdateable<Curre
 
     @Override
     public void update(CurrentAQIWeather data) {
-        String aqi = data.getAQI();
+        String pm25 = data.getPM25();
         String aqiDes = "";
-        if (aqi != null) {
-            int iaqi = Integer.parseInt(aqi);
-            if (iaqi >= 0 && iaqi <= 50) {
+        if (pm25 != null) {
+            int ipm25 = Integer.parseInt(pm25);
+            if (ipm25 >= 0 && ipm25 <= 50) {
                 aqiDes = "优";
-            } else if (iaqi > 50 && iaqi <= 100) {
+            } else if (ipm25 > 50 && ipm25 <= 100) {
                 aqiDes = "良";
 
-            } else if (iaqi > 100 && iaqi <= 150) {
+            } else if (ipm25 > 100 && ipm25 <= 150) {
                 aqiDes = "中度污染";
             } else {
                 aqiDes = "重度污染";

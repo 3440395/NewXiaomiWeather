@@ -9,6 +9,7 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.CurrentAQIWeather;
 import com.xk.xiaomiweather.ui.IVUpdateable;
 
+import static com.xk.xiaomiweather.R.id.aqi;
 import static com.xk.xiaomiweather.R.id.aqi_index;
 import static com.xk.xiaomiweather.R.id.wind_direction;
 import static com.xk.xiaomiweather.R.id.wind_strength;
@@ -46,16 +47,16 @@ public class TitleItem extends FrameLayout implements IVUpdateable<CurrentAQIWea
         time.setVisibility(VISIBLE);
         time.setText(stime+":00发布");
 
-        String aqi = data.getAQI();
+        String pm25 = data.getPM25();
         String aqiDes;
-        if (aqi != null) {
-            int iaqi = Integer.parseInt(aqi);
-            if (iaqi >= 0 && iaqi <= 50) {
+        if (pm25 != null) {
+            int ipm25 = Integer.parseInt(pm25);
+            if (ipm25 >= 0 && ipm25 <= 50) {
                 aqiDes = "优";
-            } else if (iaqi > 50 && iaqi <= 100) {
+            } else if (ipm25 > 50 && ipm25 <= 100) {
                 aqiDes = "良";
 
-            } else if (iaqi > 100 && iaqi <= 150) {
+            } else if (ipm25 > 100 && ipm25 <= 150) {
                 aqiDes = "中度污染";
             } else {
                 aqiDes = "重度污染";

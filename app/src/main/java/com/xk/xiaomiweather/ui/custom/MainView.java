@@ -113,25 +113,13 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
             humidity.setText(data.getBaseWeather().getCurrentBaseWeather().getHumidity());
         }
         if (data.getAqiWeather().getCurrentAQIWeather() != null) {
-            String aqi = data.getAqiWeather().getCurrentAQIWeather().getAQI();
+            String pm25 = data.getAqiWeather().getCurrentAQIWeather().getPM25();
 
-            String aqiDes;
-            if (aqi != null) {
-                int iaqi = Integer.parseInt(aqi);
-                if (iaqi >= 0 && iaqi <= 50) {
-                    aqiDes = "空气优";
-                } else if (iaqi > 50 && iaqi <= 100) {
-                    aqiDes = "空气良";
+            String  aqiDes = "PM2.5";
+                int ipm25 = Integer.parseInt(pm25);
 
-                } else if (iaqi > 100 && iaqi <= 150) {
-                    aqiDes = "空气中";
-
-                } else {
-                    aqiDes = "空气差";
-                }
-                this.aqi.setText(aqiDes);
-                aqi_index.setText(aqi);
-            }
+                aqi.setText(aqiDes);
+                aqi_index.setText(ipm25+"");
 
             String[] split = null;
             if (data.getBaseWeather().getTodayBaseWeather().getWeather().contains("-")) {

@@ -149,7 +149,7 @@ public class AirQualityView extends RelativeLayout implements IVUpdateable<Weath
 
     @Override
     public void update(Weather data) {
-        dialView.updata(data.getAqiWeather().getCurrentAQIWeather().getAQI(), "AQI", "空气质量指数", 0, 400);
+        dialView.updata(data.getAqiWeather().getCurrentAQIWeather().getPM25(), "PM2.5", "PM2.5", 0, 400);
         cityName.setText(data.getCity().getDistrict());
         publish.setText("环境云 " + data.getAqiWeather().getCurrentAQIWeather().getTime().substring(8) + ":00发布");
         polluteDetialView.update(data.getAqiWeather().getCurrentAQIWeather());
