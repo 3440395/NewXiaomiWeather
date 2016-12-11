@@ -413,8 +413,6 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
                     } else {
                         refreshData();
                     }
-
-
                 }
                 break;
             case MotionEvent.ACTION_DOWN:
@@ -442,14 +440,17 @@ public class PageView extends ScrollView implements IVUpdateable<Weather> {
 
             hoursTempGraphView.setData(data.getBaseWeather().getThreeHourBaseWeathers());
 
-
         }
         if (data != null && data.getAqiWeather().getCurrentAQIWeather() != null) {
             CurrentAQIWeather currentAQIWeather = data.getAqiWeather().getCurrentAQIWeather();
             titleItem2.update(currentAQIWeather);
             airQuality1.updata(currentAQIWeather.getPM25(),"PM2.5","PM2.5",0,400);
 
-
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             float max=0;
             String des="";
 

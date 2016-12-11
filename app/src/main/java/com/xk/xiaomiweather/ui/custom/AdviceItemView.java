@@ -13,6 +13,8 @@ import com.xk.xiaomiweather.ui.IVUpdateable;
 
 import org.w3c.dom.Text;
 
+import static com.xk.xiaomiweather.R.id.temp;
+
 /**
  * Created by xk on 2016/11/8 20:15.
  */
@@ -85,13 +87,18 @@ public class AdviceItemView extends FrameLayout implements IVUpdateable<TodayBas
         String weather = data.getWeather();
         if(weather.contains("雨")||weather.contains("雪")||weather.contains("雾")||weather.contains("霾")||weather.contains("尘")||weather.contains("沙")){
             des.setText("今天天气特殊，不建议室外运动。");
+        }else{
+            String temp = data.getTemperature().replace("℃", "");
+            String[] temps = temp.split("~");
+            if(Integer.parseInt(temps[0])>5&&(weather.contains("晴")||weather.contains("多云")||weather.contains("阴"))){
+                des.setText("今天天气不错，大家开心动起来吧。");
+                return;
+            }
         }
-
-        String temp = data.getTemperature().replace("℃", "");
-        String[] temps = temp.split("~");
-        if(Integer.parseInt(temps[0])>5&&(weather.contains("晴")||weather.contains("多云")||weather.contains("阴"))){
             des.setText("今天天气不错，大家开心动起来吧。");
-        }
+
+
+
     }
 
     private void washAdvice(TodayBaseWeather data) {
