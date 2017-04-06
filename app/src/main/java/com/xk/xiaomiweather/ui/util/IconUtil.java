@@ -113,4 +113,111 @@ public class IconUtil {
 //            default:imageView.setImageDrawable(null);
         }
     }
+
+
+
+    public static void setMainViewBg(ImageView imageView, String weatherId) {
+        switch (weatherId) {
+            case "00":
+                imageView.setImageResource(R.mipmap.qing);
+                break;
+            case "01":
+                imageView.setImageResource(R.mipmap.duoyun);
+                break;
+            case "02":
+                imageView.setImageResource(R.mipmap.duoyun);
+                break;
+            case "03":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "04":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "05":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "06":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "07":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "08":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "09":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "10":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "11":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "12":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "13":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "14":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "15":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "16":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "17":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "18":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "19":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "20":
+                imageView.setImageResource(R.mipmap.duoyun);
+                break;
+            case "21":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "22":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "23":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "24":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "25":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "26":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "27":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "28":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "29":
+                imageView.setImageResource(R.mipmap.xiayu);
+                break;
+            case "30":
+                imageView.setImageResource(R.mipmap.wumai);
+                break;
+            case "31":
+                imageView.setImageResource(R.mipmap.wumai);
+                break;
+            case "53":
+                imageView.setImageResource(R.mipmap.wumai);
+                break;
+//            default:imageView.setImageDrawable(null);
+        }
+    }
 }

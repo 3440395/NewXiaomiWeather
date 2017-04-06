@@ -3,6 +3,8 @@ package com.xk.xiaomiweather.ui.custom;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,6 +19,7 @@ import com.xk.xiaomiweather.R;
 import com.xk.xiaomiweather.model.bean.Weather;
 import com.xk.xiaomiweather.ui.CityManageActivity;
 import com.xk.xiaomiweather.ui.IVUpdateable;
+import com.xk.xiaomiweather.ui.util.IconUtil;
 import com.xk.xiaomiweather.ui.util.ScreenManager;
 
 import org.w3c.dom.Text;
@@ -36,6 +39,7 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
     private TextView tempTextView;
     private TextView cityAndState;
     private ImageView more;
+    private ImageView background;
 
     public MainView(Context context) {
         super(context);
@@ -54,6 +58,11 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
 
     private void init() {
         setBackgroundColor(0xff2FB184);
+
+        background = new ImageView(getContext());
+        background.setScaleType(ImageView.ScaleType.FIT_XY);
+        background.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(background);
 
         more = new ImageView(getContext());
         more.setImageResource(R.mipmap.icon_more);
@@ -103,6 +112,7 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
 
     @Override
     public void update(Weather data) {
+        IconUtil.setMainViewBg(background,data.getBaseWeather().getTodayBaseWeather().getWeather_id()[0]);
         cityAndState.setText(data.getCity().getDistrict());
         if (data.getBaseWeather().getCurrentBaseWeather() != null) {
 
