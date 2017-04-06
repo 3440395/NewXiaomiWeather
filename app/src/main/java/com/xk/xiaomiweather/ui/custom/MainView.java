@@ -10,6 +10,8 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,6 +42,7 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
     private TextView cityAndState;
     private ImageView more;
     private ImageView background;
+    private ScaleAnimation scaleAnimation;
 
     public MainView(Context context) {
         super(context);
@@ -113,6 +116,10 @@ public class MainView extends RelativeLayout implements IVUpdateable<Weather> {
     @Override
     public void update(Weather data) {
         IconUtil.setMainViewBg(background,data.getBaseWeather().getTodayBaseWeather().getWeather_id()[0]);
+        scaleAnimation = new ScaleAnimation(1, 1.5f, 1, 1.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(10000);
+        scaleAnimation.setRepeatCount(-1);
+        background.startAnimation(scaleAnimation);
         cityAndState.setText(data.getCity().getDistrict());
         if (data.getBaseWeather().getCurrentBaseWeather() != null) {
 
