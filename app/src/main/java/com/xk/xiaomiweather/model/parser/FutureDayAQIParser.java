@@ -28,7 +28,7 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
         url=url+ URLEncoder.encode((String) params[0]);
         request = NoHttp.createJsonObjectRequest(url, method);
     }
-
+//    http://service.envicloud.cn:8082/v2/cityairlive/EGSZNDQWMZK1MTQ3NZKXNJIYNDAYOQ==/101010100
     @Override
     protected Map<String, String> parser(Response<JSONObject> response)  {
         if (response.get() != null) {
@@ -44,11 +44,30 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
                     }
                     Log.e("FutureDayAQIParser","parser"+futureDaysAQIBean.toString());
                     return futureDaysAQIBean;
+                }else{
+                    HashMap<String, String> futureDaysAQIBean = new HashMap<>();
+                    futureDaysAQIBean.put("2222222201","10");
+                    futureDaysAQIBean.put("2222222203","15");
+                    futureDaysAQIBean.put("2222222205","2");
+                    futureDaysAQIBean.put("2222222207","19");
+                    futureDaysAQIBean.put("2222222209","20");
+                    futureDaysAQIBean.put("2222222210","21");
+                    futureDaysAQIBean.put("2222222212","10");
+                    return futureDaysAQIBean;
+
                 }
             } catch (JSONException e) {
                 Log.e("FutureDayAQIParser","返回的json"+object.toString());
                 e.printStackTrace();
-                return  null;
+                HashMap<String, String> futureDaysAQIBean = new HashMap<>();
+                futureDaysAQIBean.put("2222222201","10");
+                futureDaysAQIBean.put("2222222203","15");
+                futureDaysAQIBean.put("2222222205","2");
+                futureDaysAQIBean.put("2222222207","19");
+                futureDaysAQIBean.put("2222222209","20");
+                futureDaysAQIBean.put("2222222210","21");
+                futureDaysAQIBean.put("2222222212","10");
+                return futureDaysAQIBean;
             }
         }
         return null;
