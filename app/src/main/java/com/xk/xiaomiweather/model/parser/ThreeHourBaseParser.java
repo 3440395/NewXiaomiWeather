@@ -56,9 +56,14 @@ public class ThreeHourBaseParser  extends  BaseParser<List<ThreeHourBaseWeather>
                         threeHourBaseWeathers.add(threeHourBaseWeather);
                     }
                     return threeHourBaseWeathers;
+                }else{
+                    Log.e("api挂了", "ThreeHourBaseWeather");
+
+                    return null;
                 }
             } catch (JSONException e) {
-                Log.e("ThreeHourBaseParser","返回的json"+object.toString());
+                Log.e("api挂了", "ThreeHourBaseWeather");
+
                 e.printStackTrace();
                 return null;
             }

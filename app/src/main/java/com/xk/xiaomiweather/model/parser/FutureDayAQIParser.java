@@ -45,6 +45,7 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
                     Log.e("FutureDayAQIParser","parser"+futureDaysAQIBean.toString());
                     return futureDaysAQIBean;
                 }else{
+                    Log.e("api挂了", "FutureDayAQI");
                     HashMap<String, String> futureDaysAQIBean = new HashMap<>();
                     futureDaysAQIBean.put("2222222201","10");
                     futureDaysAQIBean.put("2222222203","15");
@@ -54,9 +55,9 @@ public class FutureDayAQIParser extends BaseParser<Map<String, String>, JSONObje
                     futureDaysAQIBean.put("2222222210","21");
                     futureDaysAQIBean.put("2222222212","10");
                     return futureDaysAQIBean;
-
                 }
             } catch (JSONException e) {
+                Log.e("api挂了", "FutureDayAQI");
                 Log.e("FutureDayAQIParser","返回的json"+object.toString());
                 e.printStackTrace();
                 HashMap<String, String> futureDaysAQIBean = new HashMap<>();
